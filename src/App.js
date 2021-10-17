@@ -1,8 +1,11 @@
+import React from 'react';
+import Navbar from './components/Navbar'; 
+
 function App() {
   return (
-    <div>
-      <h4>Teste</h4>
-    </div>
+    <React.Fragment>
+      <Navbar></Navbar>
+    </React.Fragment>
   );
 }
 
