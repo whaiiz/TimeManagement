@@ -1,0 +1,79 @@
+.task-list {
+    width: 100%;
+}
+
+.task-list td {
+    padding: 1em;
+    text-align: center;
+}
+
+.task-date {
+    background-color: white;
+}
+
+.task-name {
+    background-color: white;
+    border-left: 0.5em solid #547CC8;
+}
+
+.task-status {
+    color: white;
+}
+
+.active-status {
+    background-color:#547CC8;
+}
+
+.todo-status {
+    background-color: rgb(143, 143, 143);
+}
+
+.done-status {
+    background-color: rgb(99, 170, 99);
+}
+
+.task-table tr:not(:first-child):hover * {
+    background-color: #547CC8;
+    cursor: pointer;
+}
+
+.search-input {
+    padding: 0.5em 1em;
+    border-radius: 1.5em;
+    border-style: solid;
+    min-width: 30vw;
+}
+
+.search-input::placeholder {
+    color: #7B7979;
+}
+
+.search-input:hover {
+    border-color: #547CC8;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #547CC8;
+}
+
+.work-item-operations {
+    display: flex;
+    justify-content: center;
+    margin: 1.5em 0 1.5em 0;
+    gap: 0.5em;
+}
+
+.add-button {
+    background-color: #547CC8;
+    color: white;
+    padding: 0.5em 0.7em;
+    border-radius: 0.8em;
+    text-decoration: none;
+    float: right;
+}
+
+.add-button:hover {
+    background-color: rgb(58, 51, 51);
+    color: #547CC8;
+}

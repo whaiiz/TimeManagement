@@ -1,0 +1,23 @@
+.pagination-items {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 2em;
+}
+
+.pagination-item {
+    text-decoration: none;
+    padding: 1em;
+}
+
+.pagination-item:hover{
+    background-color: black;
+    color: #547CC8;
+    border-radius: 3em;
+}
+
+.selected-item {
+    background-color:#547CC8;
+    color: rgb(104, 96, 96);
+    border-radius: 3em;
+}
