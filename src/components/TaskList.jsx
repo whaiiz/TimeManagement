@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Pagination from './Pagination';
+import TaskTable from './TaskTable';
 
 import '../styles/task-list.css';
 
@@ -26,31 +27,10 @@ export default function TaskList() {
     return (
         <React.Fragment>
             <section className="task-operations">
-                <article className="search-container">
-                    <input className="search-input" type="text" placeholder="Search" />
-                </article>
-                <article className="add-container">
-                    <a href="#add-task" className="add-button">+</a>
-                </article>
+                <input className="search-input" type="text" placeholder="Search" />
+                <a href="#add-task" className="add-button">+</a>
             </section>
-            <table className="task-list">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {currentTasks.map(w => (
-                        <tr key={`task-${w.displayId}`}>
-                            <td className="task-name">{w.name}</td>
-                            <td className={`task-status ${w.status.toLowerCase()}-status`}>{w.status}</td>
-                            <td className="task-date">{w.date}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <TaskTable tasks={currentTasks}></TaskTable>
             <Pagination 
                 itemsPerPage={tasksPerPage} 
                 itemsCount={tasks.length}
