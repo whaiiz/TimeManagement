@@ -1,8 +1,13 @@
+import React from 'react';
+import Navbar from './components/Navbar'; 
+import TaskList from './components/TaskList'; 
+
 function App() {
   return (
-    <div>
-      <h4>Teste</h4>
-    </div>
+    <React.Fragment>
+      <Navbar></Navbar>
+      <TaskList></TaskList>
+    </React.Fragment>
   );
 }
 

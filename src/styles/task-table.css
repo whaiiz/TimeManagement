@@ -1,0 +1,38 @@
+.task-table {
+    width: 100%;
+}
+
+.task-table td {
+    padding: 1em;
+    text-align: center;
+}
+
+.task-date {
+    background-color: white;
+}
+
+.task-name {
+    background-color: white;
+    border-left: 0.5em solid #547CC8;
+}
+
+.task-status {
+    color: white;
+}
+
+.active-status {
+    background-color:#547CC8;
+}
+
+.todo-status {
+    background-color: rgb(143, 143, 143);
+}
+
+.done-status {
+    background-color: rgb(99, 170, 99);
+}
+
+.task-table tr:hover * {
+    background-color: #547CC8;
+    cursor: pointer;
+}

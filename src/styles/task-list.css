@@ -1,0 +1,40 @@
+.search-input {
+    padding: 0.5em 1em;
+    border-radius: 1.5em;
+    border-style: solid;
+    min-width: 30vw;
+}
+
+.search-input::placeholder {
+    color: #7B7979;
+}
+
+.search-input:hover {
+    border-color: #547CC8;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #547CC8;
+}
+
+.task-operations {
+    display: flex;
+    justify-content: center;
+    margin: 1.5em 0 1.5em 0;
+    gap: 0.5em;
+}
+
+.add-button {
+    background-color: #547CC8;
+    color: white;
+    padding: 0.5em 0.7em;
+    border-radius: 0.8em;
+    text-decoration: none;
+    float: right;
+}
+
+.add-button:hover {
+    background-color: rgb(58, 51, 51);
+    color: #547CC8;
+}
