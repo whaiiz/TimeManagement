@@ -32,7 +32,7 @@
     background-color: rgb(99, 170, 99);
 }
 
-.task-table tr:hover * {
+.task-table tr:hover *:not(th) {
     background-color: #547CC8;
     cursor: pointer;
 }

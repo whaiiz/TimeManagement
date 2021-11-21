@@ -1,5 +1,4 @@
 import React from 'react'
-
 import '../styles/task-table.css';
 
 export default function TaskTable({tasks}) {
