@@ -3,34 +3,38 @@ import Pagination from '../components/Pagination';
 import TaskTable from '../components/TaskTable';
 import { getTasks } from '../services/task-service';
 import '../styles/task-list.css';
-import { Link } from 'react-router-dom';
 import UpsertTaskModal from '../components/modals/upsert-task/UpsertTaskModal';
 
 export default function TaskList() {
-    const [tasks, setTasks] = useState([]);
-    const [tasksPerPage] = useState(5);
-    const [currentTasks, setCurrentTasks] = useState([]);
 
-    const filterByName = ({target : {value}}) => {
-        setCurrentTasks(tasks.filter(t => t.name.includes(value)));
+    const TASKS_PER_PAGE = 5;
+
+    let [tasks, setTasks] = useState([]);
+    let [tasksFiltered, setTasksFiltered] = useState([]);
+    let [pageTasks, setPageTasks] = useState([]);
+    let [isUpsertModalVisible, setUpsertModalVisibility] = useState(false);
+
+    let paginate = (pageNumber) => {
+        let indexOfLastTask = pageNumber * TASKS_PER_PAGE; 
+        let indexOfFirstTask = indexOfLastTask - TASKS_PER_PAGE;
+
+        setPageTasks(tasksFiltered.slice(indexOfFirstTask, indexOfLastTask));
+    }
+   
+    let filterByName = ( { target : { value } } ) => {
+        if (!value) setTasksFiltered(tasks);
+        setTasksFiltered(tasks.filter(t => t.name.toLowerCase().includes(value.toLowerCase())));
     }
 
-    const paginate = (pageNumber) => {
-        const indexOfLastTask = pageNumber - tasksPerPage; 
-        const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+    useEffect(() => paginate(1), [tasksFiltered])
 
-        setCurrentTasks(tasks.slice(indexOfFirstTask, indexOfLastTask));
-    };
-    
     useEffect(() => {
-        const init = async () => {
-            const response = await getTasks();
-            const tasks = await response.json();
-            const indexOfLastTask = 1 - tasksPerPage; 
-            const indexOfFirstTask = indexOfLastTask - tasksPerPage;
-
-            setTasks(tasks);
-            setCurrentTasks(tasks.slice(indexOfFirstTask, indexOfLastTask));
+        let init = async () => {
+            let response = await getTasks();
+            let result = await response.json();
+            
+            setTasks(result);
+            setTasksFiltered(result);
         }
         init();
     }, []);
@@ -39,15 +43,15 @@ export default function TaskList() {
         <React.Fragment>
             <section className="task-operations">
                 <input className="search-input" type="text" placeholder="Search" onChange={(e) => filterByName(e)} />
-                <Link to="/UpsertTask" className="add-button">+</Link>
+                <input className="add-button" type="button" value="+" onClick={() => setUpsertModalVisibility(true)} />
             </section>
-            <TaskTable tasks={currentTasks}></TaskTable>
+            <TaskTable tasks={pageTasks}></TaskTable>
             <Pagination 
-                itemsPerPage={tasksPerPage} 
-                itemsCount={tasks.length}
+                itemsPerPage={TASKS_PER_PAGE} 
+                itemsCount={tasksFiltered.length}
                 paginate={paginate}>
             </Pagination>
-            <UpsertTaskModal />
+            <UpsertTaskModal isVisible={isUpsertModalVisible} />
         </React.Fragment>
     );
 }

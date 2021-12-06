@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/task-table.css';
 
 export default function TaskTable({tasks}) {
-    return (
+    return ( tasks.length === 0 ? <h1>No results to show</h1> : 
         <table className="task-table">
             <thead>
                 <tr>

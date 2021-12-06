@@ -40,6 +40,10 @@
     padding: 10px 20px;
     background: #fff;
   }
+
+  .modal-visible {
+    display: block;
+  }
   
   .modal-footer {
     background: var(--modal-color);

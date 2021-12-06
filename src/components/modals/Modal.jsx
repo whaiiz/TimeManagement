@@ -1,19 +1,19 @@
 import React from 'react'
 import '../../styles/modal.css';
 
-export default function Modal({HeaderComponent, BodyComponent, FooterComponent}) {
+export default function Modal({Header, Body, Footer, isVisible}) {
     return (
-        <section id="modal" className="modal">
+        <section id="modal" className={isVisible ? "modal modal-visible" : "modal"}>
             <main className="modal-content">
                 <header className="modal-header">
                     <span className="close">&times;</span>
-                    <HeaderComponent/>
+                    <Header/>
                 </header>
                 <main className="modal-body">
-                    <BodyComponent/>
+                    <Body/>
                 </main>
                 <footer className="modal-footer">
-                    <FooterComponent/>
+                    <Footer/>
                 </footer>
             </main>
         </section>

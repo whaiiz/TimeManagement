@@ -5,12 +5,12 @@ import UpsertTaskModalHeader from './UpsertTaskModalHeader';
 import UpsertTaskModalBody from './UpsertTaskModalBody';
 import UpsertTaskModalFooter from './UpsertTaskModalFooter';
 
-export default function UpsertTaskModal() {
+export default function UpsertTaskModal({isVisible}) {
     return (
-        <Modal
-            HeaderComponent={UpsertTaskModalHeader}
-            BodyComponent={UpsertTaskModalBody}
-            FooterComponent={UpsertTaskModalFooter}
+        <Modal isVisible={isVisible}
+            Header={UpsertTaskModalHeader}
+            Body={UpsertTaskModalBody}
+            Footer={UpsertTaskModalFooter}
         />
     );
 }
