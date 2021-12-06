@@ -19,6 +19,7 @@ export default function Pagination({itemsPerPage, itemsCount, paginate}) {
             }
     
             setPageNumbers(newPageNumbers);
+            setCurrentPage(1);
         }
 
         setupPagination();
