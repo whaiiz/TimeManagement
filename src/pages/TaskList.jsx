@@ -21,7 +21,7 @@ export default function TaskList() {
         setPageTasks(tasksFiltered.slice(indexOfFirstTask, indexOfLastTask));
     }
    
-    let filterByName = ( { target : { value } } ) => {
+    let filterByName = ({target:{value}}) => {
         if (!value) setTasksFiltered(tasks);
         setTasksFiltered(tasks.filter(t => t.name.toLowerCase().includes(value.toLowerCase())));
     }
@@ -42,8 +42,8 @@ export default function TaskList() {
     return (
         <React.Fragment>
             <section className="task-operations">
-                <input className="search-input" type="text" placeholder="Search" onChange={(e) => filterByName(e)} />
-                <input className="add-button" type="button" value="+" onClick={() => setUpsertModalVisibility(true)} />
+                <input className="search-input" type="text" placeholder="Search" onChange={e => filterByName(e)} />
+                <input className="add-button" type="button" value="+" onClick={_ => setUpsertModalVisibility(true)}/>
             </section>
             <TaskTable tasks={pageTasks}></TaskTable>
             <Pagination 
@@ -51,7 +51,7 @@ export default function TaskList() {
                 itemsCount={tasksFiltered.length}
                 paginate={paginate}>
             </Pagination>
-            <UpsertTaskModal isVisible={isUpsertModalVisible} />
+            <UpsertTaskModal isVisible={isUpsertModalVisible} closeCallback={_ => setUpsertModalVisibility(false)} />
         </React.Fragment>
     );
 }

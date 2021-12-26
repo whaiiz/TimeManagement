@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar'; 
 import TaskList from './pages/TaskList'; 
-import UpsertTask from './components/modals/UpsertTask';
+import TomorrowPlan from './pages/TomorrowPlan'; 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" exact element={<TaskList/>}/>
-        <Route path="/UpsertTask" element={<UpsertTask/>}/>
+        <Route path="/TomorrowPlan" element={<TomorrowPlan/>}/>
       </Routes>
     </Router>
   );

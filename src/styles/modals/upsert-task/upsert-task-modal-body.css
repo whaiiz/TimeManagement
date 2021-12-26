@@ -1,0 +1,26 @@
+.task-status-container, .task-name-container {
+    display: inline-flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.upsert-task-form .task-status-container {
+    float: right;
+}
+
+.upsert-task-form .task-description-container {
+    margin-top: 1vh;
+}
+
+.upsert-task-form .task-name, .task-status {
+    display: block;
+    width: 100%;
+    resize: none;
+}
+
+.upsert-task-form .task-description {
+    display: block;
+    width: 100%;
+    resize: none;
+}
+

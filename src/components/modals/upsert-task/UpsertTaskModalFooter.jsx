@@ -1,7 +1,11 @@
 import React from 'react'
+import '../../../styles/modals/upsert-task/upsert-task-modal-footer.css'
 
-export default function UpsertTaskModalFooter() {
+export default function UpsertTaskModalFooter({closeCallback}) {
     return (
-        <button>Fechar</button>                
+        <article>
+            <button onClick={closeCallback}>Fechar</button>                
+            <button>Criar</button>
+        </article>
     )
 }

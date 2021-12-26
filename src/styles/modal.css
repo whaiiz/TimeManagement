@@ -1,6 +1,6 @@
 :root {
     --modal-duration: 1s;
-    --modal-color: #428bca;
+    --modal-color: #547CC8;
   }
   
   .modal {
@@ -23,17 +23,16 @@
     animation-duration: var(--modal-duration);
   }
   
-  .modal-header h2,
-  .modal-footer h3 {
-    margin: 0;
-  }
-  
   .modal-header {
     background: var(--modal-color);
-    padding: 15px;
+    padding: 0.1vh 1vw;
     color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+  }
+
+  .modal-header h1 {
+    font-size: 20px;
   }
   
   .modal-body {

@@ -11,18 +11,14 @@ export default function Pagination({itemsPerPage, itemsCount, paginate}) {
     }
     
     useEffect(() => {
-        let setupPagination = () => {
-            let newPageNumbers = [];
+        let newPageNumbers = [];
     
-            for (let i = 1; i <= Math.ceil(itemsCount / itemsPerPage); i++) {
-                newPageNumbers.push(i);
-            }
-    
-            setPageNumbers(newPageNumbers);
-            setCurrentPage(1);
+        for (let i = 1; i <= Math.ceil(itemsCount / itemsPerPage); i++) {
+            newPageNumbers.push(i);
         }
 
-        setupPagination();
+        setPageNumbers(newPageNumbers);
+        setCurrentPage(1);
 
     }, [itemsPerPage, itemsCount]);
 

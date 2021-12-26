@@ -6,14 +6,13 @@ export default function Modal({Header, Body, Footer, isVisible}) {
         <section id="modal" className={isVisible ? "modal modal-visible" : "modal"}>
             <main className="modal-content">
                 <header className="modal-header">
-                    <span className="close">&times;</span>
-                    <Header/>
+                    {Header}
                 </header>
                 <main className="modal-body">
-                    <Body/>
+                    {Body}
                 </main>
                 <footer className="modal-footer">
-                    <Footer/>
+                    {Footer}
                 </footer>
             </main>
         </section>
