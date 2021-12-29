@@ -3,15 +3,22 @@ import Pagination from '../components/Pagination';
 import TaskTable from '../components/TaskTable';
 import { getTasks } from '../services/task-service';
 import '../styles/task-list.css';
-import UpsertTaskModal from '../components/modals/upsert-task/UpsertTaskModal';
+import UpsertTaskModal from '../components/modals/UpsertTaskModal';
 
 export default function TaskList() {
 
     const TASKS_PER_PAGE = 5;
+    const EMPTY_TASK = {
+        name: '',
+        description: '',
+        dateTime: '',
+        status: ''
+    }; 
 
     let [tasks, setTasks] = useState([]);
     let [tasksFiltered, setTasksFiltered] = useState([]);
     let [pageTasks, setPageTasks] = useState([]);
+    let [currentTask, setCurrentTask] = useState(EMPTY_TASK);
     let [isUpsertModalVisible, setUpsertModalVisibility] = useState(false);
 
     let paginate = (pageNumber) => {
@@ -19,6 +26,20 @@ export default function TaskList() {
         let indexOfFirstTask = indexOfLastTask - TASKS_PER_PAGE;
 
         setPageTasks(tasksFiltered.slice(indexOfFirstTask, indexOfLastTask));
+    }
+
+    let openCreateTaskModal = () => {
+        setUpsertModalVisibility(true);
+        setCurrentTask(EMPTY_TASK);
+    }
+
+    let openUpdateTaskModal = (id) => {
+        let task = tasks.find(t => t.id === id);
+
+        if (task) {
+            setUpsertModalVisibility(true);
+            setCurrentTask(task)
+        }
     }
    
     let filterByName = ({target:{value}}) => {
@@ -43,15 +64,20 @@ export default function TaskList() {
         <React.Fragment>
             <section className="task-operations">
                 <input className="search-input" type="text" placeholder="Search" onChange={e => filterByName(e)} />
-                <input className="add-button" type="button" value="+" onClick={_ => setUpsertModalVisibility(true)}/>
+                <input className="add-button" type="button" value="+" onClick={_ => openCreateTaskModal()}/>
             </section>
-            <TaskTable tasks={pageTasks}></TaskTable>
+            <TaskTable
+                onTaskClick={openUpdateTaskModal}
+                tasks={pageTasks}/>
             <Pagination 
                 itemsPerPage={TASKS_PER_PAGE} 
                 itemsCount={tasksFiltered.length}
                 paginate={paginate}>
             </Pagination>
-            <UpsertTaskModal isVisible={isUpsertModalVisible} closeCallback={_ => setUpsertModalVisibility(false)} />
+            <UpsertTaskModal
+                task={currentTask}
+                isVisible={isUpsertModalVisible} 
+                closeCallback={_ => setUpsertModalVisibility(false)} />
         </React.Fragment>
     );
 }

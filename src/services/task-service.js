@@ -1,9 +1,27 @@
-// const url = 'http://localhost';
+const baseUrl = 'https://localhost:44330/api';
 
-export const getTasks = async () => {
-    return await fetch('https://mocki.io/v1/004559af-e658-493f-861e-52be28b35217');
+export const getTasks = _ => {
+    return fetch(`${baseUrl}/Task`);
 }
 
-export const createTask = async () => {
-    console.log('Not implemented');
+export const createTask = task => {
+    return fetch(baseUrl + '/Task', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+    });
+}
+
+export const updateTask = task => {
+    return fetch(baseUrl + '/Task', {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+    });
 }
