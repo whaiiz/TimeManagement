@@ -1,3 +1,7 @@
-.primary-btn {
-    
+.error-text {
+    color: red;
+}
+
+.invalid-input {
+    border: 1px solid red;
 }

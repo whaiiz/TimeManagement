@@ -12,8 +12,8 @@ export default function TaskList() {
     const EMPTY_TASK = {
         name: '',
         description: '',
-        dateTime: '',
-        status: ''
+        dateTime: new Date(),
+        status: 'ToDo'
     }; 
 
     let [tasks, setTasks] = useState([]);

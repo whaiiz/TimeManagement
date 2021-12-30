@@ -8,14 +8,7 @@
     margin-top: 1.5vh;
 }
 
-.upsert-task-form .task-name, .task-status {
-    display: block;
-    width: 100%;
-    resize: none;
-}
-
 .upsert-task-form .task-description {
-    display: block;
     width: 100%;
     resize: none;
 }
