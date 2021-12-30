@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Pagination from '../components/Pagination';
 import TaskTable from '../components/TaskTable';
 import { getTasks } from '../services/task-service';
+import { errorMessage } from '../services/sweet-alert-service';
 import '../styles/task-list.css';
 import UpsertTaskModal from '../components/modals/UpsertTaskModal';
 
@@ -50,14 +51,22 @@ export default function TaskList() {
     useEffect(() => paginate(1), [tasksFiltered])
 
     useEffect(() => {
-        let init = async () => {
-            let response = await getTasks();
-            let result = await response.json();
-            
-            setTasks(result);
-            setTasksFiltered(result);
+
+        let fetchTasks = async () => {
+            try {
+                const r = await getTasks();
+                return await r.json();
+            } catch (r_1) {
+                errorMessage('Error', 'Error gettings the tasks please try aain!')
+                    .then(_ => window.location.reload());
+            }
         }
-        init();
+
+        fetchTasks().then(data => {
+            setTasks(data);
+            setTasksFiltered(data);
+        })
+
     }, []);
 
     return (

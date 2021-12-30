@@ -5,7 +5,7 @@ import Modal from './Modal';
 import '../../styles/modals/upsert-task-modal.css'
 
 export default function UpsertTaskModal({isVisible, closeCallback, task}) {
-    let {register, handleSubmit, setValue } = useForm({
+    let { register, handleSubmit, setValue } = useForm({
         defaultValues: {
             id: '',
             name: '',
