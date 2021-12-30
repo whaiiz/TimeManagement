@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { updateTask, createTask } from '../../services/task-service';
+import { errorMessage, successMessage } from '../../services/sweet-alert-service';
 import Modal from './Modal'; 
 import '../../styles/modals/upsert-task-modal.css'
 
@@ -33,11 +34,21 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
     }
 
     let create = (data) => {
-        createTask(data).then(r => console.log(r));
+        createTask(data).then(_ => {
+            successMessage("Success", "Task created!").then(_ => window.location.reload());
+        })
+        .catch(_ => {
+            errorMessage("Error", "Error creating task! Please try again.");
+        });
     }
 
     let update = (data) => {
-        updateTask(data).then(r => console.log(r));
+        updateTask(data).then(_ => {
+            successMessage("Success", "Task updated!").then(_ => window.location.reload());
+        })
+        .catch(_ => {
+            errorMessage("Error", "Error updating task! Please try again.");
+        });
     }
 
     let onSubmit = (data) => {
