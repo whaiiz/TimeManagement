@@ -25,3 +25,11 @@ export const updateTask = task => {
         body: JSON.stringify(task)
     });
 }
+
+export const updateDate = (id, date) => {
+    const args = `?id=${id}date=${date}`;
+
+    return fetch(baseUrl + `/Task/UpdateDate${args}`, {
+        method: 'PUT',
+    });
+}

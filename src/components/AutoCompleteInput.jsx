@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/auto-complete.css';
 
-export default function AutoCompleteInput({collection}) {
+export default function AutoCompleteInput({collection, onItemClick}) {
 
     let [suggestions, setSuggestions] = useState(collection);
-    let [areSuggestionsVisible, setAreSuggestionsVisible] = useState(false);
+    let [areSuggestionsVisible, setAreSuggestionsVisible] = useState(true);
 
     let getSuggestions = ({target : {value}}) => {
         return collection.filter(t => t.name.toLowerCase().includes(value.toLowerCase()));
@@ -24,9 +24,8 @@ export default function AutoCompleteInput({collection}) {
                     {
                         suggestions.map(s => {
                             return (
-                                <div key={s.name + 'teste'}> 
-                                    <strong>{s.name}</strong>{s.name}
-                                    <input type="hidden" value={s.name} />
+                                <div key={s.id} onClick={_ => onItemClick(s.id)}> 
+                                    <label>{s.name}</label>
                                 </div>
                             )
                         })

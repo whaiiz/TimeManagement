@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { getTasks } from '../services/task-service';
+import { getTasks, updateDate } from '../services/task-service';
 import { errorMessage } from '../services/sweet-alert-service';
 import TaskTableWithPagination from '../components/TaskTableWithPagination';
 import AutoCompleteInput from '../components/AutoCompleteInput';
@@ -10,6 +10,18 @@ export default function Planning() {
     const [tasks, setTasks] = useState([]);
     const [planningDate, setPlanningDate] = useState(dateTimeToDate(new Date()));
     const [planningTasks, setPlanningTasks] = useState([]);
+
+    const updateTaskDate = (id, date) => {
+        updateDate(id, date).then(_ =>  {
+            let tasksCopy = [...tasks];
+            let updatedTask = tasksCopy.find(t => t.id === id);
+
+            updatedTask.date = date;
+            tasksCopy = tasksCopy.map(t => t.id !== id ? t : updatedTask)
+
+            setTasks(tasksCopy)
+        }).catch(_ => errorMessage('Error', 'Error update task, please try again!'))
+    }
 
     useEffect(() => {
         let fetchTasks = async () => {
@@ -35,15 +47,15 @@ export default function Planning() {
         <React.Fragment>
             <section className="task-plan">
                 <article className='name'>
-                    <AutoCompleteInput collection={tasks} className="name"/>
+                    <AutoCompleteInput className="name"
+                        collection={tasks} 
+                        onItemClick={id => updateTaskDate(id, planningDate)}/>
                 </article>
                 <article className='date'>
                     <input type="date" value={planningDate} onChange={e => setPlanningDate(e.target.value)}/>
                 </article>
             </section>
-            <TaskTableWithPagination
-                tasks={planningTasks}
-                onTaskClick={_ => {}}/>
+            <TaskTableWithPagination tasks={planningTasks} />
         </React.Fragment>
     );
 }
