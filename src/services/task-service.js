@@ -1,4 +1,4 @@
-const baseUrl = 'https://localhost:44330/api';
+const baseUrl = 'https://localhost:5001/api';
 
 export const getTasks = _ => {
     return fetch(`${baseUrl}/Task`);

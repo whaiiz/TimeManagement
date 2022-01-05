@@ -40,7 +40,7 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
     }, [task])
 
     let getModalTitle = () => {
-        return task.id ?  "Atualizar tarefa" : "Adicionar tarefa";
+        return task.id ?  "Update Task" : "Add Task";
     }
 
     let create = (data) => {
@@ -107,7 +107,7 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
                 Footer={
                     <article>
                         <button type="button" onClick={closeCallback}>Close</button>                
-                        <button onClick={handleSubmit(onSubmit)}>{task.id ? "Atualizar" : "Criar"}</button>
+                        <button onClick={handleSubmit(onSubmit)}>{task.id ? "Update" : "Create"}</button>
                     </article>
                 }
             />

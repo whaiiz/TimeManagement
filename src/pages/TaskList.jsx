@@ -1,14 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import Pagination from '../components/Pagination';
-import TaskTable from '../components/TaskTable';
 import { getTasks } from '../services/task-service';
 import { errorMessage } from '../services/sweet-alert-service';
 import '../styles/task-list.css';
 import UpsertTaskModal from '../components/modals/UpsertTaskModal';
+import TaskTableWithPagination from '../components/TaskTableWithPagination';
 
 export default function TaskList() {
-
-    const TASKS_PER_PAGE = 5;
     const EMPTY_TASK = {
         name: '',
         description: '',
@@ -16,25 +13,17 @@ export default function TaskList() {
         status: 'ToDo'
     }; 
 
-    let [tasks, setTasks] = useState([]);
-    let [tasksFiltered, setTasksFiltered] = useState([]);
-    let [pageTasks, setPageTasks] = useState([]);
-    let [currentTask, setCurrentTask] = useState(EMPTY_TASK);
-    let [isUpsertModalVisible, setUpsertModalVisibility] = useState(false);
+    const [tasks, setTasks] = useState([]);
+    const [tasksFiltered, setTasksFiltered] = useState([]);
+    const [currentTask, setCurrentTask] = useState(EMPTY_TASK);
+    const [isUpsertModalVisible, setUpsertModalVisibility] = useState(false);
 
-    let paginate = (pageNumber) => {
-        let indexOfLastTask = pageNumber * TASKS_PER_PAGE; 
-        let indexOfFirstTask = indexOfLastTask - TASKS_PER_PAGE;
-
-        setPageTasks(tasksFiltered.slice(indexOfFirstTask, indexOfLastTask));
-    }
-
-    let openCreateTaskModal = () => {
+    const openCreateTaskModal = () => {
         setUpsertModalVisibility(true);
         setCurrentTask(EMPTY_TASK);
     }
 
-    let openUpdateTaskModal = (id) => {
+    const openUpdateTaskModal = (id) => {
         let task = tasks.find(t => t.id === id);
 
         if (task) {
@@ -43,21 +32,18 @@ export default function TaskList() {
         }
     }
    
-    let filterByName = ({target:{value}}) => {
+    const filterByName = ({target:{value}}) => {
         if (!value) setTasksFiltered(tasks);
         setTasksFiltered(tasks.filter(t => t.name.toLowerCase().includes(value.toLowerCase())));
     }
 
-    useEffect(() => paginate(1), [tasksFiltered])
-
     useEffect(() => {
-
-        let fetchTasks = async () => {
+        const fetchTasks = async () => {
             try {
                 const r = await getTasks();
                 return await r.json();
             } catch (r_1) {
-                errorMessage('Error', 'Error gettings the tasks please try aain!')
+                errorMessage('Error', 'Error gettings the tasks please try again!')
                     .then(_ => window.location.reload());
             }
         }
@@ -66,7 +52,6 @@ export default function TaskList() {
             setTasks(data);
             setTasksFiltered(data);
         })
-
     }, []);
 
     return (
@@ -75,18 +60,13 @@ export default function TaskList() {
                 <input className="search-input" type="text" placeholder="Search" onChange={e => filterByName(e)} />
                 <input className="add-button" type="button" value="+" onClick={_ => openCreateTaskModal()}/>
             </section>
-            <TaskTable
+            <TaskTableWithPagination
                 onTaskClick={openUpdateTaskModal}
-                tasks={pageTasks}/>
-            <Pagination 
-                itemsPerPage={TASKS_PER_PAGE} 
-                itemsCount={tasksFiltered.length}
-                paginate={paginate}>
-            </Pagination>
+                tasks={tasksFiltered}/>
             <UpsertTaskModal
                 task={currentTask}
                 isVisible={isUpsertModalVisible} 
-                closeCallback={_ => setUpsertModalVisibility(false)} />
+                closeCallback={_ => setUpsertModalVisibility(false)}/>
         </React.Fragment>
     );
 }

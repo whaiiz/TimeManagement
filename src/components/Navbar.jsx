@@ -13,7 +13,7 @@ export default function Navbar() {
                     <span className="task-tooltip">Tasks</span>
                 </li>
                 <li>
-                    <Link to='/calendar' className="calendar-link">
+                    <Link to='/Planning' className="calendar-link">
                         <i className="fas fa-calendar calendar-icon"></i>
                     </Link>
                     <span className="calendar-tooltip">Tomorrow plan</span>
