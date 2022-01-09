@@ -23,17 +23,19 @@ export default function Pagination({itemsPerPage, itemsCount, paginate}) {
     }, [itemsPerPage, itemsCount]);
 
     return (
-        <nav>
-            <ul className="pagination">
-                {pageNumbers.map(number => (
-                    <li key={number}>
-                        <span className={`pagination-item ${currentPage === number ? "selected-item" : ""}`} 
-                           onClick={() => changePage(number)}>
-                            {number}
-                        </span>
-                    </li>
-                ))}
-            </ul>
-        </nav>
+        <React.Fragment>
+            {pageNumbers.length > 1 && <nav>
+                <ul className="pagination">
+                    {pageNumbers.map(number => (
+                        <li key={number}>
+                            <span className={`pagination-item ${currentPage === number ? "selected-item" : ""}`} 
+                            onClick={() => changePage(number)}>
+                                {number}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </nav>}
+        </React.Fragment>
     )
 }
