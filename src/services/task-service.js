@@ -33,3 +33,19 @@ export const updateDate = (id, date) => {
         method: 'PUT',
     });
 }
+
+export const updateStatus = (id, status) => {
+    const args = `?id=${id}&status=${status}`;
+
+    return fetch(baseUrl + `/Task/UpdateStatus${args}`, {
+        method: 'PUT',
+    });
+}
+
+export const deleteTask = (id) => {
+    const args = `?id=${id}`;
+
+    return fetch(baseUrl + `/Task/${args}`, {
+        method: 'DELETE',
+    });
+}
