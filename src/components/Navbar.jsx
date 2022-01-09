@@ -16,7 +16,7 @@ export default function Navbar() {
                     <Link to='/Planning' className="calendar-link">
                         <i className="fas fa-calendar calendar-icon"></i>
                     </Link>
-                    <span className="calendar-tooltip">Tomorrow plan</span>
+                    <span className="calendar-tooltip">Planning</span>
                 </li>
             </ul>
         </nav>

@@ -16,10 +16,10 @@ export default function Planning() {
             let tasksCopy = [...tasks];
             let updatedTask = tasksCopy.find(t => t.id === id);
 
-            updatedTask.date = date;
-            tasksCopy = tasksCopy.map(t => t.id !== id ? t : updatedTask)
+            updatedTask.dateTime = date;
+            tasksCopy = tasksCopy.map(t => t.id !== id ? t : updatedTask);
 
-            setTasks(tasksCopy)
+            setTasks(tasksCopy);
         }).catch(_ => errorMessage('Error', 'Error update task, please try again!'))
     }
 
@@ -48,14 +48,16 @@ export default function Planning() {
             <section className="task-plan">
                 <article className='name'>
                     <AutoCompleteInput className="name"
-                        collection={tasks} 
+                        collection={tasks.filter(t => dateTimeToDate(t.dateTime) !== planningDate)} 
                         onItemClick={id => updateTaskDate(id, planningDate)}/>
                 </article>
                 <article className='date'>
                     <input type="date" value={planningDate} onChange={e => setPlanningDate(e.target.value)}/>
                 </article>
             </section>
-            <TaskTableWithPagination tasks={planningTasks} />
+            <TaskTableWithPagination 
+                tasks={planningTasks}
+                onTaskClick={_ => {}} />
         </React.Fragment>
     );
 }

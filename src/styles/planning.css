@@ -1,6 +1,6 @@
 .task-plan {
     display: flex;
-    margin-bottom: 5vh;
+    margin: 0 1rem 5vh;
 }
 
 .task-plan > .name {
@@ -14,4 +14,10 @@
 
 .task-plan > .date > input {
     width: 100%;
+}
+
+.task-plan input[type="text"],
+.task-plan input[type="date"] {
+    height: 1.5rem !important;
+    padding: 1px 2px;
 }
