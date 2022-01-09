@@ -3,34 +3,34 @@ import '../styles/auto-complete.css';
 
 export default function AutoCompleteInput({collection, onItemClick}) {
 
-    let [suggestions, setSuggestions] = useState(collection);
-    let [areSuggestionsVisible, setAreSuggestionsVisible] = useState(true);
+    const [suggestions, setSuggestions] = useState(collection);
+    const [areSuggestionsVisible, setAreSuggestionsVisible] = useState(false);
 
-    let getSuggestions = ({target : {value}}) => {
+    const getSuggestions = ({target : {value}}) => {
         return collection.filter(t => t.name.toLowerCase().includes(value.toLowerCase()));
     }
-
+ 
     useEffect(() => {
         setSuggestions(collection)
     }, [collection])
 
     return(
         <form autoComplete="off">
-            <section id="autocomplete" className="autocomplete">
+            <section className="auto-complete">
                 <input type="text" onInput={e => setSuggestions(getSuggestions(e))}
                                    onClick={_ => setAreSuggestionsVisible(true)}
-                                   onBlur={_ => setAreSuggestionsVisible(false)}/>
-                { areSuggestionsVisible && <article className="autocomplete-items">
+                                   onBlur={_ => setTimeout(_ => setAreSuggestionsVisible(false), 100)} />
+                { areSuggestionsVisible && <article className="auto-complete-items">
                     {
                         suggestions.map(s => {
                             return (
-                                <div key={s.id} onClick={_ => onItemClick(s.id)}> 
+                                <div key={s.id} onClick={_ => onItemClick(s.id)}>
                                     <label>{s.name}</label>
                                 </div>
                             )
                         })
                     }
-                </article> } 
+                </article> }
             </section>
         </form>
     )
