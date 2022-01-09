@@ -1,9 +1,10 @@
 import React from 'react'
-
 import '../styles/task-table.css';
+import { dateTimeToDate } from '../utils/date-converter';
 
-export default function TaskTable({tasks}) {
-    return (
+export default function TaskTable({tasks, onTaskClick}) {
+
+    return ( tasks.length === 0 ? <h1>No results to show</h1> : 
         <table className="task-table">
             <thead>
                 <tr>
@@ -13,11 +14,11 @@ export default function TaskTable({tasks}) {
                 </tr>
             </thead>
             <tbody>
-                {tasks.map(w => (
-                    <tr key={`task-${w.displayId}`}>
-                        <td className="task-name">{w.name}</td>
-                        <td className={`task-status ${w.status.toLowerCase()}-status`}>{w.status}</td>
-                        <td className="task-date">{w.date}</td>
+                {tasks.map(t => (
+                    <tr key={`task-${t.id}`} onClick={_ => onTaskClick(t.id)}>
+                        <td className="task-name">{t.name}</td>
+                        <td className={`task-status ${t.status.toLowerCase()}-status`}>{t.status}</td>
+                        <td className="task-date">{dateTimeToDate(t.dateTime)}</td>
                     </tr>
                 ))}
             </tbody>

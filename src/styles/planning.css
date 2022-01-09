@@ -1,0 +1,23 @@
+.task-plan {
+    display: flex;
+    margin: 0 1rem 5vh;
+}
+
+.task-plan > .name {
+    flex: 2;
+    margin-right: 1vw;
+}
+
+.task-plan > .date {
+    flex: 1;
+}
+
+.task-plan > .date > input {
+    width: 100%;
+}
+
+.task-plan input[type="text"],
+.task-plan input[type="date"] {
+    height: 1.5rem !important;
+    padding: 1px 2px;
+}

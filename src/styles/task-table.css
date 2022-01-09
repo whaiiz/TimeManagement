@@ -7,16 +7,16 @@
     text-align: center;
 }
 
-.task-date {
+.task-table .task-date {
     background-color: white;
 }
 
-.task-name {
+.task-table .task-name {
     background-color: white;
     border-left: 0.5em solid #547CC8;
 }
 
-.task-status {
+.task-table .task-status {
     color: white;
 }
 
@@ -32,7 +32,7 @@
     background-color: rgb(99, 170, 99);
 }
 
-.task-table tr:hover * {
+.task-table tr:hover *:not(th) {
     background-color: #547CC8;
     cursor: pointer;
 }

@@ -1,0 +1,29 @@
+.task-status-container, .task-name-container, .task-date-container {
+    display: inline-flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.upsert-task-form .task-description-container {
+    margin-top: 1.5vh;
+}
+
+.upsert-task-form .task-description {
+    width: 100%;
+    resize: none;
+}
+
+.upsert-task-form div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.upsert-task-form input[type="text"],
+.upsert-task-form input[type="date"]{
+    height: 1.5rem;
+    padding: 1px 2px;
+}
+
+.upsert-task-form select {
+    height: 1.9rem;
+}

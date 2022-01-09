@@ -27,6 +27,7 @@
 
 .add-button {
     background-color: #547CC8;
+    border: none;
     color: white;
     padding: 0.5em 0.7em;
     border-radius: 0.8em;
@@ -37,4 +38,5 @@
 .add-button:hover {
     background-color: rgb(58, 51, 51);
     color: #547CC8;
+    cursor: pointer;
 }
