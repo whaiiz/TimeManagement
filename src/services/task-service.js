@@ -27,7 +27,7 @@ export const updateTask = task => {
 }
 
 export const updateDate = (id, date) => {
-    const args = `?id=${id}date=${date}`;
+    const args = `?id=${id}&date=${date}`;
 
     return fetch(baseUrl + `/Task/UpdateDate${args}`, {
         method: 'PUT',
