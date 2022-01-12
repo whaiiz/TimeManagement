@@ -43,9 +43,7 @@ export const updateStatus = (id, status) => {
 }
 
 export const deleteTask = (id) => {
-    const args = `?id=${id}`;
-
-    return fetch(baseUrl + `/Task/${args}`, {
+    return fetch(baseUrl + `/Task/${id}`, {
         method: 'DELETE',
     });
 }

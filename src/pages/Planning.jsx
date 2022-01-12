@@ -33,10 +33,7 @@ export default function Planning() {
                     .then(_ => window.location.reload());
             }
         }
-
-        fetchTasks().then(data => {
-            setTasks(data);
-        })
+        fetchTasks().then(data => setTasks(data));
     }, []);
 
     useEffect(() => {
@@ -51,12 +48,13 @@ export default function Planning() {
                         collection={tasks.filter(t => dateTimeToDate(t.dateTime) !== planningDate)} 
                         onItemClick={id => updateTaskDate(id, planningDate)}/>
                 </article>
-                <article className='date'>
+                <article className="date">
                     <input type="date" value={planningDate} onChange={e => setPlanningDate(e.target.value)}/>
                 </article>
             </section>
             <TaskTableWithPagination 
                 tasks={planningTasks}
+                updateTasks={updatedTasks => setTasks(updatedTasks)}
                 onTaskClick={_ => {}} />
         </React.Fragment>
     );
