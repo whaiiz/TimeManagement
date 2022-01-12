@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Pagination from '../components/Pagination';
 import TaskTable from '../components/TaskTable';
 
-export default function TaskTableWithPagination({tasks, onTaskClick}) {
+export default function TaskTableWithPagination({tasks, onTaskClick, updateTasks}) {
     const TASKS_PER_PAGE = 5;
     const [pageTasks, setPageTasks] = useState([]);
     
@@ -22,7 +22,8 @@ export default function TaskTableWithPagination({tasks, onTaskClick}) {
         <React.Fragment>
             <TaskTable
                 onTaskClick={onTaskClick}
-                tasks={pageTasks}/>
+                tasks={pageTasks}
+                updateTasks={updateTasks} />
             <Pagination 
                 itemsPerPage={TASKS_PER_PAGE} 
                 itemsCount={tasks.length}

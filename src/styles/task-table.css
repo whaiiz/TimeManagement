@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-.task-table .task-date {
+.task-table .task-date, .task-table .task-actions {
     background-color: white;
 }
 
@@ -18,6 +18,14 @@
 
 .task-table .task-status {
     color: white;
+}
+
+.task-table .task-actions > * {
+    margin: 0.2rem;
+}
+
+.task-table .task-actions {
+    max-width: 1px;
 }
 
 .active-status {
@@ -32,7 +40,51 @@
     background-color: rgb(99, 170, 99);
 }
 
-.task-table tr:hover *:not(th) {
+.task-table tr:hover td:not(th, :last-child) {
     background-color: #547CC8;
     cursor: pointer;
+}
+
+.task-table .task-actions .fa-check-circle {
+    color: green;
+    font-size: 1.5rem;
+    transition: transform .2s;
+}
+
+.task-table .task-actions .fa-history {
+    color: #547CC8;
+    font-size: 1.5rem;
+    transition: transform .2s;
+}
+
+.task-table .task-actions .fa-times-circle {
+    color: red;
+    font-size: 1.5rem;
+    transition: transform .2s;
+}
+
+.task-table .task-actions .fa-play-circle {
+    color: #547CC8;
+    font-size: 1.5rem;
+    transition: transform .2s;
+}
+
+.task-table .task-actions .fa-check-circle:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.task-table .task-actions .fa-history:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.task-table .task-actions .fa-times-circle:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.task-table .task-actions .fa-play-circle:hover {
+    cursor: pointer;
+    transform: scale(1.5);
 }

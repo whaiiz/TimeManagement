@@ -38,6 +38,10 @@ export default function TaskList() {
     }
 
     useEffect(() => {
+        setTasksFiltered(tasks);
+    }, [tasks])
+
+    useEffect(() => {
         const fetchTasks = async () => {
             try {
                 const r = await getTasks();
@@ -62,7 +66,8 @@ export default function TaskList() {
             </section>
             <TaskTableWithPagination
                 onTaskClick={openUpdateTaskModal}
-                tasks={tasksFiltered}/>
+                tasks={tasksFiltered}
+                updateTasks={updatedTasks => setTasks(updatedTasks)}/>
             <UpsertTaskModal
                 task={currentTask}
                 isVisible={isUpsertModalVisible} 
