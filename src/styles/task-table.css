@@ -63,6 +63,12 @@
     transition: transform .2s;
 }
 
+.task-table .task-actions .fa-play-circle {
+    color: #547CC8;
+    font-size: 1.5rem;
+    transition: transform .2s;
+}
+
 .task-table .task-actions .fa-check-circle:hover {
     cursor: pointer;
     transform: scale(1.5);
@@ -74,6 +80,11 @@
 }
 
 .task-table .task-actions .fa-times-circle:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.task-table .task-actions .fa-play-circle:hover {
     cursor: pointer;
     transform: scale(1.5);
 }

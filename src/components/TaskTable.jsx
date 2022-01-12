@@ -41,6 +41,11 @@ export default function TaskTable({tasks, onTaskClick, updateTasks}) {
         e.stopPropagation();
     }
 
+    const startTask = (e, id) => {
+        handleUpdateStatus(id, 'Active');
+        e.stopPropagation();
+    }
+
     return ( tasks.length === 0 ? <h1>No results to show</h1> : 
         <table className="task-table">
             <thead>
@@ -58,6 +63,7 @@ export default function TaskTable({tasks, onTaskClick, updateTasks}) {
                         <td className={`task-status ${t.status.toLowerCase()}-status`}>{t.status}</td>
                         <td className="task-date">{dateTimeToDate(t.dateTime)}</td>
                         <td className="task-actions">
+                            {t.status === 'ToDo' && <i className="fas fa-play-circle" onClick={e => startTask(e, t.id)}></i>}
                             {t.status === 'Active' && <i className="fas fa-check-circle" onClick={e => completeTask(e, t.id)}></i>}
                             {t.status !== 'ToDo' && <i className="fas fa-history" onClick={e => revertTaskStatus(e, t.id)}></i>}
                             <i className="fas fa-times-circle" onClick={e => openDeleteTaskModal(e, t.id)}></i>
