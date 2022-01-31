@@ -3,6 +3,7 @@ import { getTasks } from '../services/task-service';
 import { errorMessage } from '../services/sweet-alert-service';
 import '../styles/task-list.css';
 import UpsertTaskModal from '../components/modals/UpsertTaskModal';
+import Navbar from '../components/Navbar'; 
 import TaskTableWithPagination from '../components/TaskTableWithPagination';
 
 export default function TaskList() {
@@ -60,6 +61,7 @@ export default function TaskList() {
 
     return (
         <React.Fragment>
+            <Navbar />
             <section className="task-operations">
                 <input className="search-input" type="text" placeholder="Search" onChange={e => filterByName(e)} />
                 <input className="add-button" type="button" value="+" onClick={_ => openCreateTaskModal()}/>
