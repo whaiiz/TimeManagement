@@ -18,12 +18,12 @@ body {
 
 .login-form > article {
     width: 100%;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 .login-form label {
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .login-form input {
@@ -35,8 +35,9 @@ body {
     box-sizing:border-box
 }
 
-.login-form input:hover {
-    border-color:#547CC8
+.login-form input:focus {
+    outline: none;
+    border-color:#547CC8;
 }
 
 .login-button {
@@ -44,7 +45,7 @@ body {
 }
 
 .login-button {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     background-color: #547CC8;
     border: none;
     border-radius: 0.8em;
@@ -58,6 +59,23 @@ body {
     background-color: rgb(51, 51, 58);
     color: #547CC8;
     cursor: pointer;
+}
+
+.register, 
+.forgot-password {
+    color: grey;
+    font-size: 0.8em;
+    text-decoration: none;
+}
+
+.register:hover, 
+.forgot-password:hover {
+    color: #547CC8;
+}
+
+.forgot-password {
+    float: right;
+    margin-top: 0.5rem;
 }
 
 @media only screen and (max-width: 600px) {
