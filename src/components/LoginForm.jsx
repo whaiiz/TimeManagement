@@ -19,7 +19,7 @@ export default function LoginForm() {
             </article>
             <button className="login-button" type="submit">Log in</button>
             <a className="register" href="/Register">
-                No account? Click here to register</a>
+                No account? Click here to register.</a>
         </form>
     )
 }

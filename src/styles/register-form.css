@@ -28,7 +28,7 @@ body {
     border-style: solid;
     padding: 0.5em;
     width: 100%;
-    box-sizing:border-box
+    box-sizing: border-box
 }
 
 .register-form input:focus {
@@ -65,8 +65,14 @@ body {
 
 .login:hover { color: #547CC8; }
 
+@media only screen and (max-width: 1000px) {
+    .register-form {
+        width: 80vw;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .register-form {
-        width: 90vw;
+        width: 100vw;
     }
 }
