@@ -1,5 +1,11 @@
 import React from 'react';
+import ForgotPasswordForm from '../components/ForgotPasswordForm';
+import '../styles/forgot-password.css';
 
 export default function ForgotPassword() {
-  return <h1>Unvailable for now</h1>
+	return (
+		<section className="forgot-password-container">
+			<ForgotPasswordForm/>
+		</section>		
+	);
 }
