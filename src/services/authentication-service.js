@@ -12,7 +12,7 @@ export const handleLoginRequest = (username, password) => {
 }
 
 export const handleRegisterRequest = (user) => {
-    return fetch(baseUrl + '/Authentication/Login', {
+    return fetch(baseUrl + '/Authentication/Register', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
