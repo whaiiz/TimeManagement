@@ -1,13 +1,16 @@
 const baseUrl = 'https://localhost:5001/api';
 
 export const handleLoginRequest = (username, password) => {
+    let user = {
+        username, password
+    }
     return fetch(baseUrl + '/Authentication/Login', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({username, password})
+        body: JSON.stringify(user)
     });
 }
 

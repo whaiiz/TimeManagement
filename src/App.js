@@ -1,5 +1,4 @@
 import React from 'react';
-import TaskList from './pages/TaskList'; 
 import Planning from './pages/Planning';
 import Login from './pages/Login';
 import Register from './pages/Register';
