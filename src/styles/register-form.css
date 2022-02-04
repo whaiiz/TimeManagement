@@ -14,12 +14,11 @@ body {
 
 .register-form > article {
     width: 100%;
-    margin: 0.5rem;
 }
 
 .register-form label {
     display: block;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
 }
 
 .register-form input {
