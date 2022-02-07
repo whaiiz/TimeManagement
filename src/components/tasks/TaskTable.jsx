@@ -1,8 +1,8 @@
 import React from 'react'
 import '../styles/task-table.css';
-import { dateTimeToDate } from '../utils/date-converter';
+import { dateTimeToDate } from '../../utils/date-converter';
 import { deleteDialog, successMessage, errorMessage } from '../services/sweet-alert-service';
-import { deleteTask, updateStatus } from '../services/task-service';
+import { deleteTask, updateStatus } from '../../repositories/task-repository';
 
 export default function TaskTable({tasks, onTaskClick, updateTasks}) {
 
