@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { getTasks } from '../services/task-service';
+import { getTasks } from '../repositories/task-repository';
 import { errorMessage } from '../services/sweet-alert-service';
 import '../styles/task-list.css';
 import UpsertTaskModal from '../components/modals/UpsertTaskModal';
