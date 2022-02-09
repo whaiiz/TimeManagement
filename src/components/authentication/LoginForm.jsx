@@ -1,10 +1,10 @@
 import React from 'react';
-import '../styles/login-form.css';
+import '../../styles/login-form.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
-import { successMessage, errorMessage } from '../services/sweet-alert-service';
-import { handleLoginRequest } from '../services/authentication-service';
+import { successMessage, errorMessage } from '../../utils/sweet-alert';
+import { login } from '../../business-layer/authentication';
 
 export default function LoginForm() {
     const schema = yup.object({
@@ -22,17 +22,14 @@ export default function LoginForm() {
 
     const handleLogin = async _ => {
         let { username, password } = getValues();
-        let request = await handleLoginRequest(username, password);
-        let response = await request.json();
+        let { isLoggedIn, message } = await login(username, password);
 
-        if (request.status === 200) {
-            successMessage('Success', response).then(_ => {
-                console.log('teste');
-            });
+        if (isLoggedIn) {
+            successMessage('Success', message);
             return;
         }
 
-        errorMessage('Error', response);
+        errorMessage('Error', message);
     }
 
     return (

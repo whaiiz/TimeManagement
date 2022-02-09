@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { updateTask, createTask } from '../../services/task-service';
+import { updateTask, createTask } from '../../repositories/task-repository';
 import { errorMessage, successMessage } from '../../services/sweet-alert-service';
 import Modal from './Modal'; 
 import '../../styles/modals/upsert-task-modal.css';

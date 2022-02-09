@@ -1,6 +1,6 @@
 const baseUrl = 'https://localhost:5001/api';
 
-export const handleLoginRequest = (username, password) => {
+export const loginRequest = (username, password) => {
     let user = {
         username, password
     }
@@ -14,7 +14,7 @@ export const handleLoginRequest = (username, password) => {
     });
 }
 
-export const handleRegisterRequest = (user) => {
+export const registerRequest = (user) => {
     return fetch(baseUrl + '/Authentication/Register', {
         method: 'POST',
         headers: {

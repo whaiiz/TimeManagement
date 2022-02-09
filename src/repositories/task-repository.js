@@ -1,10 +1,10 @@
 const baseUrl = 'https://localhost:5001/api';
 
-export const getTasks = _ => {
+export const getTasksRequest = _ => {
     return fetch(`${baseUrl}/Task`);
 }
 
-export const createTask = task => {
+export const createTaskRequest = task => {
     return fetch(baseUrl + '/Task', {
         method: 'POST',
         headers: {
@@ -15,7 +15,7 @@ export const createTask = task => {
     });
 }
 
-export const updateTask = task => {
+export const updateTaskRequest = task => {
     return fetch(baseUrl + '/Task', {
         method: 'PUT',
         headers: {
@@ -26,7 +26,7 @@ export const updateTask = task => {
     });
 }
 
-export const updateDate = (id, date) => {
+export const updateTaskDateRequest = (id, date) => {
     const args = `?id=${id}&date=${date}`;
 
     return fetch(baseUrl + `/Task/UpdateDate${args}`, {
@@ -34,7 +34,7 @@ export const updateDate = (id, date) => {
     });
 }
 
-export const updateStatus = (id, status) => {
+export const updateTaskStatusRequest = (id, status) => {
     const args = `?id=${id}&status=${status}`;
 
     return fetch(baseUrl + `/Task/UpdateStatus${args}`, {
@@ -42,7 +42,7 @@ export const updateStatus = (id, status) => {
     });
 }
 
-export const deleteTask = (id) => {
+export const deleteTaskRequest = (id) => {
     return fetch(baseUrl + `/Task/${id}`, {
         method: 'DELETE',
     });

@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import '../styles/register-form.css';
+import '../../styles/register-form.css';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { handleRegisterRequest } from '../services/authentication-service';
-import { successMessage, errorMessage } from '../services/sweet-alert-service';
+import { register as handleRegister} from '../../business-layer/authentication';
+import { successMessage, errorMessage } from '../../utils/sweet-alert';
 
 export default function RegisterForm() {
+    // move this to a different file
     const schema = yup.object({
         username: yup.string().required("Username is mandatory").max(20, 'Username can\'t have more than 20 digits'),
         email: yup.string().required("Email is mandatory").max(50, 'Name can\'t have more than 50 digits'),
@@ -30,18 +31,10 @@ export default function RegisterForm() {
 
     let handleRegistration = async _ => {
         let user = getValues();
-        let request = await handleRegisterRequest(user);
-        let response = await request.json();
+        let { success, message } = await handleRegister(user);
 
-        if (request.status === 200) {
-            successMessage('Success', 'User registered, please confirm your email').then(_ => {
-                window.location.href = '/Login';
-            });
-
-            return;
-        }
-
-        errorMessage('Error', response);
+        if (success) successMessage('Success', message).then(_ => window.location.href = '/Login');
+        else errorMessage('Error', message);
     }
 
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/forgot-password-form.css';
+import '../../styles/forgot-password-form.css';
 
 export default function ForgotPasswordForm() {
     return (

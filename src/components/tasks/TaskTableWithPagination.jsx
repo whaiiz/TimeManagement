@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Pagination from '../components/Pagination';
-import TaskTable from '../components/TaskTable';
+import Pagination from '../../components/common/Pagination';
+import TaskTable from '../../components/tasks/TaskTable';
 
 export default function TaskTableWithPagination({tasks, onTaskClick, updateTasks}) {
     const TASKS_PER_PAGE = 5;

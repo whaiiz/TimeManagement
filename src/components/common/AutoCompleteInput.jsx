@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/auto-complete.css';
+import '../../styles/auto-complete.css';
 
 export default function AutoCompleteInput({collection, onItemClick}) {
 
