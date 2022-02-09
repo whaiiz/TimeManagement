@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { getTasks } from '../repositories/task-repository';
-import { errorMessage } from '../services/sweet-alert-service';
+import { getTasks } from '../business-layer/tasks';
+import { errorMessage } from '../utils/sweet-alert';
 import '../styles/task-list.css';
 import UpsertTaskModal from '../components/modals/UpsertTaskModal';
-import Navbar from '../components/Navbar'; 
-import TaskTableWithPagination from '../components/TaskTableWithPagination';
+import Navbar from '../components/common/Navbar'; 
+import TaskTableWithPagination from '../components/tasks/TaskTableWithPagination';
 
 export default function TaskList() {
     const EMPTY_TASK = {
@@ -43,20 +43,15 @@ export default function TaskList() {
     }, [tasks])
 
     useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                const r = await getTasks();
-                return await r.json();
-            } catch (r_1) {
-                errorMessage('Error', 'Error gettings the tasks please try again!')
-                    .then(_ => window.location.reload());
+        getTasks().then(result => {
+            if (result.success) {
+                setTasks(result.tasks);
+                setTasksFiltered(result.tasks);
+                return;
             }
-        }
 
-        fetchTasks().then(data => {
-            setTasks(data);
-            setTasksFiltered(data);
-        })
+            errorMessage('Error', 'Error gettings the tasks please try again!').then(_ => window.location.reload());
+        });
     }, []);
 
     return (
