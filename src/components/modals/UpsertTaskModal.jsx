@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { updateTask, createTask } from '../../repositories/task-repository';
-import { errorMessage, successMessage } from '../../services/sweet-alert-service';
+import { updateTask, createTask } from '../../business-layer/tasks';
+import { errorMessage, successMessage } from '../../utils/sweet-alert';
 import Modal from './Modal'; 
 import '../../styles/modals/upsert-task-modal.css';
 import { yupResolver } from '@hookform/resolvers/yup';
