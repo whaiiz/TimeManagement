@@ -1,5 +1,5 @@
 import { getTasksRequest, createTaskRequest, updateTaskRequest, updateTaskDateRequest, 
-    updateTaskStatusRequest, deleteTaskRequest}  from '../../repositories/authentication-repository';
+    updateTaskStatusRequest, deleteTaskRequest}  from '../repositories/task-repository';
 
 export const getTasks = async _ => {
     let request = await getTasksRequest();

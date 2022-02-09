@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { getTasks, updateDate } from '../services/task-service';
-import { errorMessage } from '../services/sweet-alert-service';
-import TaskTableWithPagination from '../components/TaskTableWithPagination';
-import AutoCompleteInput from '../components/AutoCompleteInput';
-import Navbar from '../components/Navbar'; 
+import { getTasks, updateTaskDate as handleUpdateTaskDate } from '../business-layer/tasks';
+import { errorMessage } from '../utils/sweet-alert';
+import TaskTableWithPagination from '../components/tasks/TaskTableWithPagination';
+import AutoCompleteInput from '../components/common/AutoCompleteInput';
+import Navbar from '../components/common/Navbar'; 
 import { dateTimeToDate } from '../utils/date-converter';
 import '../styles/planning.css';
 
@@ -13,7 +13,7 @@ export default function Planning() {
     const [planningTasks, setPlanningTasks] = useState([]);
 
     const updateTaskDate = (id, date) => {
-        updateDate(id, date).then(_ =>  {
+        handleUpdateTaskDate(id, date).then(_ =>  {
             let tasksCopy = [...tasks];
             let updatedTask = tasksCopy.find(t => t.id === id);
 

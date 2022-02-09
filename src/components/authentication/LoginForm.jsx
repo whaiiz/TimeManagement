@@ -1,9 +1,9 @@
 import React from 'react';
-import '../styles/login-form.css';
+import '../../styles/login-form.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
-import { successMessage, errorMessage } from '../services/sweet-alert-service';
+import { successMessage, errorMessage } from '../../utils/sweet-alert';
 import { login } from '../../business-layer/authentication';
 
 export default function LoginForm() {

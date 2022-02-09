@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import '../styles/pagination.css';
+import '../../styles/pagination.css';
 
 export default function Pagination({itemsPerPage, itemsCount, paginate}) {
     const [pageNumbers, setPageNumbers] = useState([]);

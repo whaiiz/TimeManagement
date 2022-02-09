@@ -1,8 +1,8 @@
 import React from 'react'
-import '../styles/task-table.css';
+import '../../styles/task-table.css';
 import { dateTimeToDate } from '../../utils/date-converter';
-import { deleteDialog, successMessage, errorMessage } from '../services/sweet-alert-service';
-import { deleteTask, updateStatus } from '../../repositories/task-repository';
+import { deleteDialog, successMessage, errorMessage } from '../../utils/sweet-alert';
+import { deleteTask, updateTaskStatus } from '../../business-layer/tasks.js';
 
 export default function TaskTable({tasks, onTaskClick, updateTasks}) {
 
@@ -26,7 +26,7 @@ export default function TaskTable({tasks, onTaskClick, updateTasks}) {
         let updatedTask = tasks.find(t => t.id === id);
         updatedTask.status = status;
 
-        updateStatus(id, status).then(_ => updateTasks(tasks.map(t => t.id !== id ? t : updatedTask)))
+        updateTaskStatus(id, status).then(_ => updateTasks(tasks.map(t => t.id !== id ? t : updatedTask)))
             .catch(_ => errorMessage('Error', 'Error updating task please try again!'));
     }
 

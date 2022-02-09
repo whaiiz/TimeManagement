@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import '../styles/register-form.css';
+import '../../styles/register-form.css';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { register as handleRegister} from '../../business-layer/authentication';
-import { successMessage, errorMessage } from '../services/sweet-alert-service';
+import { successMessage, errorMessage } from '../../utils/sweet-alert';
 
 export default function RegisterForm() {
+    // move this to a different file
     const schema = yup.object({
         username: yup.string().required("Username is mandatory").max(20, 'Username can\'t have more than 20 digits'),
         email: yup.string().required("Email is mandatory").max(50, 'Name can\'t have more than 50 digits'),
