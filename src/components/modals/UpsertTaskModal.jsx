@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { updateTask, createTask } from '../../repositories/task-repository';
-import { errorMessage, successMessage } from '../../services/sweet-alert-service';
+import { updateTask, createTask } from '../../business-layer/tasks';
+import { errorMessage, successMessage } from '../../utils/sweet-alert';
 import Modal from './Modal'; 
 import '../../styles/modals/upsert-task-modal.css';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -43,27 +43,27 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
         return task.id ?  "Update Task" : "Add Task";
     }
 
-    let create = (data) => {
-        createTask(data).then(_ => {
+    let create = async data => {
+        if (await createTask(data)) {
             successMessage("Success", "Task created!").then(_ => window.location.reload());
-        })
-        .catch(_ => {
-            errorMessage("Error", "Error creating task! Please try again.");
-        });
+            return;
+        }
+
+        errorMessage("Error", "Error creating task! Please try again.");
     }
 
-    let update = (data) => {
-        updateTask(data).then(_ => {
+    let update = async data => {
+        if (await updateTask(data)) {
             successMessage("Success", "Task updated!").then(_ => window.location.reload());
-        })
-        .catch(_ => {
-            errorMessage("Error", "Error updating task! Please try again.");
-        });
+            return;
+        }
+
+        errorMessage("Error", "Error updating task! Please try again.");
     }
 
-    let onSubmit = (data) => {
-        if(data.id) update(data);
-        else create(data);
+    let onSubmit = async data => {
+        if (data.id) await update(data);
+        else await create(data);
     }
 
     return (

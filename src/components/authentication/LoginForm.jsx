@@ -24,12 +24,8 @@ export default function LoginForm() {
         let { username, password } = getValues();
         let { isLoggedIn, message } = await login(username, password);
 
-        if (isLoggedIn) {
-            successMessage('Success', message);
-            return;
-        }
-
-        errorMessage('Error', message);
+        if (isLoggedIn) successMessage('Success', message).then(_ => window.location.href = '/');
+        else errorMessage('Error', message);
     }
 
     return (

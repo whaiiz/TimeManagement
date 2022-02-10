@@ -11,7 +11,7 @@ export const login = async (username, password) => {
         result.message = "You are logged in";
     }
 
-    return response;
+    return result;
 }
 
 export const register = async (user) => {
@@ -23,3 +23,9 @@ export const register = async (user) => {
 }
 
 export const isUserLoggedIn = _ => true;
+
+export const getUserLoggedIn = _ => {}
+
+export const getUserLoggedInToken = _ => {}
+
+export const logout = _ => {}
