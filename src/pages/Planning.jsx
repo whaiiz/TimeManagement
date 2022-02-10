@@ -12,29 +12,30 @@ export default function Planning() {
     const [planningDate, setPlanningDate] = useState(dateTimeToDate(new Date()));
     const [planningTasks, setPlanningTasks] = useState([]);
 
-    const updateTaskDate = (id, date) => {
-        handleUpdateTaskDate(id, date).then(_ =>  {
+    const updateTaskDate = async (id, date) => {
+        if (await handleUpdateTaskDate(id, date)) {
             let tasksCopy = [...tasks];
             let updatedTask = tasksCopy.find(t => t.id === id);
 
             updatedTask.dateTime = date;
             tasksCopy = tasksCopy.map(t => t.id !== id ? t : updatedTask);
-
             setTasks(tasksCopy);
-        }).catch(_ => errorMessage('Error', 'Error update task, please try again!'))
+
+            return;
+        }
+
+        errorMessage('Error', 'Error updating task, please try again!')
     }
 
     useEffect(() => {
-        let fetchTasks = async () => {
-            try {
-                const r = await getTasks();
-                return await r.json();
-            } catch (r_1) {
-                errorMessage('Error', 'Error gettings the tasks please try again!')
-                    .then(_ => window.location.reload());
+        getTasks().then(result => {
+            if (result.success) {
+                setTasks(result.tasks);
+                return;
             }
-        }
-        fetchTasks().then(data => setTasks(data));
+            
+            errorMessage('Error', 'Error gettings the tasks please try again!').then(_ => window.location.reload());
+        })
     }, []);
 
     useEffect(() => {
