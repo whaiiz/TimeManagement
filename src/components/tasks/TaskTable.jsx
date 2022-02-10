@@ -14,20 +14,23 @@ export default function TaskTable({tasks, onTaskClick, updateTasks}) {
         e.stopPropagation();
     }
     
-    const handleDeleteTask = (id) => {
-        deleteTask(id).then(_ => {
-            successMessage("Success", "Task deleted!").then(_ => {
-                updateTasks(tasks.filter(t => t.id !== id));
-            });
-        }).catch(_ => errorMessage('Error', 'Error deleting the task please try again!'));
+    const handleDeleteTask = async (id) => {
+        if (await deleteTask(id)) {
+            successMessage("Success", "Task deleted!").then(_ => updateTasks(tasks.filter(t => t.id !== id)));
+            return;
+        }
+
+        errorMessage('Error', 'Error deleting the task please try again!');
     }
 
-    const handleUpdateStatus = (id, status) => {
+    const handleUpdateStatus = async (id, status) => {
         let updatedTask = tasks.find(t => t.id === id);
         updatedTask.status = status;
 
-        updateTaskStatus(id, status).then(_ => updateTasks(tasks.map(t => t.id !== id ? t : updatedTask)))
-            .catch(_ => errorMessage('Error', 'Error updating task please try again!'));
+        updateTaskStatus(id, status).then(success => {
+            if (success) updateTasks(tasks.map(t => t.id !== id ? t : updatedTask));
+            else errorMessage('Error', 'Error updating task please try again!');
+        })
     }
 
     const revertTaskStatus = (e, id) => {
