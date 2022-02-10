@@ -38,9 +38,7 @@ export default function TaskList() {
         setTasksFiltered(tasks.filter(t => t.name.toLowerCase().includes(value.toLowerCase())));
     }
 
-    useEffect(() => {
-        setTasksFiltered(tasks);
-    }, [tasks])
+    useEffect(() => setTasksFiltered(tasks), [tasks])
 
     useEffect(() => {
         getTasks().then(result => {
