@@ -6,7 +6,7 @@ export const login = async (username, password) => {
     let result = { isLoggedIn: false, message: response }
 
     if (request.status === 200) {
-        localStorage.setItem("key", response);
+        localStorage.setItem("auth-token", response);
         result.isLoggedIn = true;
         result.message = "You are logged in";
     }
@@ -22,10 +22,6 @@ export const register = async (user) => {
         { success: true, message: 'User registered, please confirm your email'} 
 }
 
-export const isUserLoggedIn = _ => true;
-
-export const getUserLoggedIn = _ => {}
-
-export const getUserLoggedInToken = _ => {}
+export const getUserLoggedInToken = _ => localStorage.getItem("auth-token");
 
 export const logout = _ => {}
