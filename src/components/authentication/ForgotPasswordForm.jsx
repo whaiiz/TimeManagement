@@ -10,7 +10,7 @@ export default function ForgotPasswordForm() {
                 <input type="text" id="email" placeholder="randomemail@hotmail.com" />
             </article>
             <button className="send-email-button" type="submit">Send email</button>
-            <a className="login" href="/">Go back to login</a>
+            <a className="login" href="/Login">Go back to login</a>
         </form>
     );
 }
