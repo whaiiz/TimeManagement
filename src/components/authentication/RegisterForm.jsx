@@ -65,7 +65,7 @@ export default function RegisterForm() {
                 <label className="error-text">{errors.confirmPassword?.message}</label>
             </article>
             <button className="register-button" type="submit" onClick={handleSubmit(handleRegistration)}>Register</button>
-            <a className="login" href="/">Already have an account? 
+            <a className="login" href="/Login">Already have an account? 
                 Click here to log in</a>
         </form>
     );
