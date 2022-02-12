@@ -18,6 +18,12 @@ export default function Navbar() {
                     </Link>
                     <span className="calendar-tooltip">Planning</span>
                 </li>
+                <li>
+                    <Link to='/Logout' className="logout-link">
+                        <i className="fas fa-door-open logout-icon"></i>
+                    </Link>
+                    <span className="calendar-tooltip">Log out</span>
+                </li>
             </ul>
         </nav>
     )
