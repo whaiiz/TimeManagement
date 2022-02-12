@@ -56,7 +56,7 @@ export default function TaskList() {
     }, []);
 
     return (
-        <React.Fragment>
+        <main className="task-list">
             <Navbar />
             <section className="task-operations">
                 <input className="search-input" type="text" placeholder="Search" onChange={e => filterByName(e)} />
@@ -70,6 +70,6 @@ export default function TaskList() {
                 task={currentTask}
                 isVisible={isUpsertModalVisible} 
                 closeCallback={_ => setUpsertModalVisibility(false)}/>
-        </React.Fragment>
+        </main>
     );
 }

@@ -46,7 +46,7 @@ export default function Planning() {
     }, [planningDate, tasks])
 
     return (
-        <React.Fragment>
+        <main className="task-planning">
             <Navbar />
             <section className="task-plan">
                 <article className='name'>
@@ -62,6 +62,6 @@ export default function Planning() {
                 tasks={planningTasks}
                 updateTasks={updatedTasks => setTasks(updatedTasks)}
                 onTaskClick={_ => {}} />
-        </React.Fragment>
+        </main>
     );
 }

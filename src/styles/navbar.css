@@ -11,14 +11,14 @@
     padding: 0.5em;
 }
 
-.task-icon, .calendar-icon {
+.task-icon, .calendar-icon, .logout-icon {
     color: white;
     transition: transform .2s;
     text-decoration: none;
     font-size: 1.4em;
 }
 
-.task-icon:hover, .calendar-icon:hover {
+.task-icon:hover, .calendar-icon:hover, .logout-icon:hover {
     transform: scale(1.5);
 }
 
@@ -37,6 +37,6 @@
     margin-left: -60px;
 }
 
-.task-link:hover + span, .calendar-link:hover + span { 
+.task-link:hover + span, .calendar-link:hover + span, .logout-link:hover + span { 
     visibility: visible 
 }

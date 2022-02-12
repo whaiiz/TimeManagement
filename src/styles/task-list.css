@@ -1,3 +1,8 @@
+.task-list {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
 .search-input {
     padding: 0.5em 1em;
     border-radius: 1.5em;
