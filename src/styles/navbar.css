@@ -40,3 +40,7 @@
 .task-link:hover + span, .calendar-link:hover + span, .logout-link:hover + span { 
     visibility: visible 
 }
+
+.logout-link:hover {
+    cursor: pointer;
+}
