@@ -1,8 +1,14 @@
 import React from 'react'
 import '../../styles/navbar.css';
 import { Link } from 'react-router-dom';
-
+import { logout } from '../../business-layer/authentication.js'
 export default function Navbar() {
+
+    let handleLogout = () => {
+        logout();
+        window.location.href = '/Login';
+    }
+
     return(
         <nav className="menu">
             <ul className="navbar-items">
@@ -19,9 +25,9 @@ export default function Navbar() {
                     <span className="calendar-tooltip">Planning</span>
                 </li>
                 <li>
-                    <Link to='/Logout' className="logout-link">
+                    <span onClick={handleLogout} className="logout-link">
                         <i className="fas fa-door-open logout-icon"></i>
-                    </Link>
+                    </span>
                     <span className="calendar-tooltip">Log out</span>
                 </li>
             </ul>

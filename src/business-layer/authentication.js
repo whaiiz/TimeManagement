@@ -22,6 +22,7 @@ export const register = async (user) => {
         { success: true, message: 'User registered, please confirm your email'} 
 }
 
+// TO DO : Change to http only cookie
 export const getUserLoggedInToken = _ => localStorage.getItem("auth-token");
 
-export const logout = _ => {}
+export const logout = _ => localStorage.removeItem("auth-token");
