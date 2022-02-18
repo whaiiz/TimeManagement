@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../styles/login-form.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
 import { successMessage, errorMessage } from '../../utils/sweet-alert';
 import { login } from '../../business-layer/authentication';
+import { Loading } from '../../components/common/Loading';
 
 export default function LoginForm() {
+    const [isPageLoading, setIsPageLoading] = useState(false);
+
     const schema = yup.object({
         username: yup.string().required("Please insert your username"),
         password: yup.string().required("Please insert your password")
@@ -23,12 +26,17 @@ export default function LoginForm() {
     const handleLogin = async _ => {
         let { username, password } = getValues();
         let { isLoggedIn, message } = await login(username, password);
+        
+        setIsPageLoading(true);
 
         if (isLoggedIn) successMessage('Success', message).then(_ => window.location.href = '/');
         else errorMessage('Error', message);
+
+        setIsPageLoading(false);
     }
 
     return (
+        isPageLoading  ? <Loading></Loading> :  
         <form className="login-form">
             <h1 className="login-title">Login</h1>
             <article className="username-container">
