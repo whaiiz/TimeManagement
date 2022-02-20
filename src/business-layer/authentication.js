@@ -1,4 +1,4 @@
-import { loginRequest, registerRequest } from '../repositories/authentication-repository';
+import { loginRequest, registerRequest,  forgotPasswordRequest, resetPasswordRequest } from '../repositories/authentication-repository';
 
 export const login = async (username, password) => {
     let request = await loginRequest(username, password);
@@ -20,6 +20,24 @@ export const register = async (user) => {
 
     return request.status !== 200 ? { success: false, message: response}: 
         { success: true, message: 'User registered, please confirm your email'} 
+}
+
+export const forgotPassword = async email => {
+    let request = await forgotPasswordRequest(email);
+    console.log(request);
+    let response = await request.text();
+
+
+    return request.status !== 200 ? { success: false, message: response}: 
+        { success: true, message: `Email sent for ${email} to reset your password`};
+}
+
+export const resetPassword = async (newPassword, token) => {
+    let request = await resetPasswordRequest(newPassword, token);
+    let response = await request.json();
+
+    return request.status !== 200 ? { success: false, message: response}: 
+        { success: true, message: `Password changed`} 
 }
 
 // TO DO : Change to http only cookie

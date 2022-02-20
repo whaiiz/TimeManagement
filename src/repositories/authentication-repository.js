@@ -24,3 +24,21 @@ export const registerRequest = (user) => {
         body: JSON.stringify(user)
     });
 }
+
+export const forgotPasswordRequest = email => {
+    return fetch(baseUrl + `/Authentication/ForgotPassword?email=${email}`, {
+        method: 'POST',
+    });
+}
+
+export const resetPasswordRequest = (newPassword, token) => {
+    return fetch(baseUrl + '/Authentication/ResetPassword', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: newPassword
+    });
+};
