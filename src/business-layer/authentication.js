@@ -24,7 +24,6 @@ export const register = async (user) => {
 
 export const forgotPassword = async email => {
     let request = await forgotPasswordRequest(email);
-    console.log(request);
     let response = await request.text();
 
 
