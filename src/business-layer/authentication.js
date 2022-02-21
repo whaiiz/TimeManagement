@@ -13,25 +13,26 @@ const getLoginResponse = (request, requestResponse) => {
 }
 
 export const login = async (username, password) => {
-    let request = {}
-    let response = {}
-
     try {
-        request = await loginRequest(username, password);
-        response = await request.json();
+        let request = await loginRequest(username, password);
+        return getLoginResponse(request, await request.json());
     } catch (ex) {
-        return { isLoggedIn: false, message: "Unexpected error! Try again later"};
+        return { isLoggedIn: false, message: 'Unexpected error! Try again later'};
     }
+}
 
-    return getLoginResponse(request, response);
+const getRegisterResponse = (request, requestResponse) => {
+    return request.status !== 200 ? { success: false, message: requestResponse }: 
+        { success: true, message: 'User registered, please confirm your email'} 
 }
 
 export const register = async (user) => {
-    let request = await registerRequest(user);
-    let response = await request.json();
-
-    return request.status !== 200 ? { success: false, message: response}: 
-        { success: true, message: 'User registered, please confirm your email'} 
+    try {
+        let request = await registerRequest(user);
+        return getRegisterResponse(request, await request.json());
+    } catch(ex){
+        return { success: false, message: 'Unexpected error! Try again later'}
+    }
 }
 
 export const forgotPassword = async email => {
