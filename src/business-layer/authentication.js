@@ -1,17 +1,29 @@
 import { loginRequest, registerRequest,  forgotPasswordRequest, resetPasswordRequest } from '../repositories/authentication-repository';
 
-export const login = async (username, password) => {
-    let request = await loginRequest(username, password);
-    let response = await request.json();
-    let result = { isLoggedIn: false, message: response }
+const getLoginResponse = (request, requestResponse) => {
+    let result = { isLoggedIn: false, message: requestResponse }
 
     if (request.status === 200) {
-        localStorage.setItem("auth-token", response);
+        localStorage.setItem("auth-token", requestResponse);
         result.isLoggedIn = true;
-        result.message = "You are logged in";
+        result.message = "Login success";
     }
 
     return result;
+}
+
+export const login = async (username, password) => {
+    let request = {}
+    let response = {}
+
+    try {
+        request = await loginRequest(username, password);
+        response = await request.json();
+    } catch (ex) {
+        return { isLoggedIn: false, message: "Unexpected error! Try again later"};
+    }
+
+    return getLoginResponse(request, response);
 }
 
 export const register = async (user) => {
@@ -25,7 +37,6 @@ export const register = async (user) => {
 export const forgotPassword = async email => {
     let request = await forgotPasswordRequest(email);
     let response = await request.text();
-
 
     return request.status !== 200 ? { success: false, message: response}: 
         { success: true, message: `Email sent for ${email} to reset your password`};
