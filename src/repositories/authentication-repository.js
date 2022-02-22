@@ -39,6 +39,6 @@ export const resetPasswordRequest = (newPassword, token) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: newPassword
+        body: JSON.stringify(newPassword)
     });
 };

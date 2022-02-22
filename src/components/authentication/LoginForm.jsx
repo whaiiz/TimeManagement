@@ -32,7 +32,7 @@ export default function LoginForm() {
         
         setIsPageLoading(false);
 
-        if (isLoggedIn) successMessage('Success', message).then(_ => window.location.href = '/');
+        if (isLoggedIn) window.location.href = '/';
         else errorMessage('Error', message);
     }
 
