@@ -3,7 +3,7 @@ import '../../styles/login-form.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
-import { successMessage, errorMessage } from '../../utils/sweet-alert';
+import { errorMessage } from '../../utils/sweet-alert';
 import { login } from '../../business-layer/authentication';
 import Loading from '../../components/common/Loading';
 
