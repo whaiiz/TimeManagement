@@ -30,25 +30,38 @@ export const register = async (user) => {
     try {
         let request = await registerRequest(user);
         return getRegisterResponse(request, await request.json());
-    } catch(ex){
+    } catch(ex) {
         return { success: false, message: 'Unexpected error! Try again later'}
     }
 }
 
-export const forgotPassword = async email => {
-    let request = await forgotPasswordRequest(email);
-    let response = await request.text();
-
-    return request.status !== 200 ? { success: false, message: response}: 
+const getForgotPasswordResponse = (request, requestResponse, email) => {
+    return request.status !== 200 ? { success: false, message: requestResponse}: 
         { success: true, message: `Email sent for ${email} to reset your password`};
 }
 
-export const resetPassword = async (newPassword, token) => {
-    let request = await resetPasswordRequest(newPassword, token);
-    let response = await request.json();
+export const forgotPassword = async email => {
+    try {
+        let request = await forgotPasswordRequest(email);
+        return getForgotPasswordResponse(request, await request.json(), email);
+    } catch(ex) {
+        return { success: false, message: 'Unexpected error! Try again later'}
+    }
 
-    return request.status !== 200 ? { success: false, message: response}: 
+}
+
+const getResetPasswordResponse = (request, requestResponse) => {
+    return request.status !== 200 ? { success: false, message: requestResponse}: 
         { success: true, message: `Password changed`} 
+}
+
+export const resetPassword = async (newPassword, token) => {
+    try {
+        let request = await resetPasswordRequest(newPassword, token);
+        return getResetPasswordResponse(request, await request.json());
+    } catch (ex) {
+        return { success: false, message: 'Unexpected error! Try again later'}
+    }
 }
 
 // TO DO : Change to http only cookie
