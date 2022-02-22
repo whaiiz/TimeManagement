@@ -47,7 +47,6 @@ export const forgotPassword = async email => {
     } catch(ex) {
         return { success: false, message: 'Unexpected error! Try again later'}
     }
-
 }
 
 const getResetPasswordResponse = (request, requestResponse) => {
