@@ -11,7 +11,9 @@ export default function ForgotPasswordForm() {
     const [isPageLoading, setIsPageLoading] = useState(false);
 
     const schema = yup.object({
-        email: yup.string().required("Email is mandatory").max(50, 'Email can\'t have more than 50 digits'),
+        email: yup.string().required("Email is mandatory")
+            .max(50, 'Email can\'t have more than 50 digits')
+            .email('Invalid email format'),
     });
 
     const { register, formState: { errors }, handleSubmit, getValues } = useForm({
