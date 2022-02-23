@@ -32,7 +32,7 @@ export default function Planning() {
         if (!getUserLoggedInToken()) window.location.href = '/Login';
 
         getTasks().then(result => {
-            if (result.success) {
+            if (result.status === 200) {
                 setTasks(result.tasks);
                 return;
             }
