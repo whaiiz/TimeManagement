@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/navbar.css';
+import '../../styles/common/navbar.css';
 import { Link } from 'react-router-dom';
 import { logout } from '../../business-layer/authentication.js'
 export default function Navbar() {

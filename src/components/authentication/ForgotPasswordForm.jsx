@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../../styles/forgot-password-form.css';
+import '../../styles/components/authentication/forgot-password-form.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';

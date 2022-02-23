@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import '../../styles/reset-password-form.css';
+import '../../styles/components/authentication/reset-password-form.css';
 import { resetPassword } from '../../business-layer/authentication';
 import Loading from '../../components/common/Loading';
 import { errorMessage, successMessage } from '../../utils/sweet-alert';

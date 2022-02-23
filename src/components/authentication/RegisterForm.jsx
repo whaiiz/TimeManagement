@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import '../../styles/register-form.css';
+import '../../styles/components/authentication/register-form.css';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { register as handleRegister} from '../../business-layer/authentication';

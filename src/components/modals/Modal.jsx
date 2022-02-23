@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/modal.css';
+import '../../styles/components/modals/modal.css';
 
 export default function Modal({Header, Body, Footer, isVisible}) {
     return (

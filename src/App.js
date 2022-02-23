@@ -5,8 +5,8 @@ import TaskList from './pages/TaskList';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
-import './styles/normalize.css';
-import './styles/common.css';
+import './styles/common/normalize.css';
+import './styles/common/common.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
