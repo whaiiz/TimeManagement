@@ -45,9 +45,14 @@ export default function TaskList() {
         if (!getUserLoggedInToken()) window.location.href = '/Login';
 
         getTasks().then(result => {
-            if (result.success) {
+            if (result.status === 200) {
                 setTasks(result.tasks);
                 setTasksFiltered(result.tasks);
+                return;
+            }
+
+            if (result.status === 401) {
+                window.location.href = '/Login';
                 return;
             }
 
