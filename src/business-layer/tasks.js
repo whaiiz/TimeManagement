@@ -2,11 +2,10 @@ import { getTasksRequest, createTaskRequest, updateTaskRequest, updateTaskDateRe
     updateTaskStatusRequest, deleteTaskRequest}  from '../repositories/task-repository';
 
 let getGetTasksResponse = async (request) => {
-    let result = { success: false, tasks: [] };
+    let result = { success: false, tasks: [], status: request.status };
 
     if (request.status === 200) {
         let response = await request.json();
-        result.success = true;
         result.tasks = response;
     }
     

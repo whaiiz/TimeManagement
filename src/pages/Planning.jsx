@@ -6,7 +6,7 @@ import AutoCompleteInput from '../components/common/AutoCompleteInput';
 import Navbar from '../components/common/Navbar'; 
 import { dateTimeToDate } from '../utils/date-converter';
 import { getUserLoggedInToken } from '../business-layer/authentication';
-import '../styles/planning.css';
+import '../styles/pages/planning.css';
 
 export default function Planning() {
     const [tasks, setTasks] = useState([]);
@@ -32,7 +32,7 @@ export default function Planning() {
         if (!getUserLoggedInToken()) window.location.href = '/Login';
 
         getTasks().then(result => {
-            if (result.success) {
+            if (result.status === 200) {
                 setTasks(result.tasks);
                 return;
             }

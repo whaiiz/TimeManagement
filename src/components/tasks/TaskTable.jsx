@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/task-table.css';
+import '../../styles/components/tasks/task-table.css';
 import { dateTimeToDate } from '../../utils/date-converter';
 import { deleteDialog, successMessage, errorMessage } from '../../utils/sweet-alert';
 import { deleteTask, updateTaskStatus } from '../../business-layer/tasks.js';

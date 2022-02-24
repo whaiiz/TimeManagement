@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { getTasks } from '../business-layer/tasks';
 import { getUserLoggedInToken } from '../business-layer/authentication';
 import { errorMessage } from '../utils/sweet-alert';
-import '../styles/task-list.css';
+import '../styles/pages/task-list.css';
 import UpsertTaskModal from '../components/modals/UpsertTaskModal';
 import Navbar from '../components/common/Navbar'; 
 import TaskTableWithPagination from '../components/tasks/TaskTableWithPagination';
@@ -45,9 +45,14 @@ export default function TaskList() {
         if (!getUserLoggedInToken()) window.location.href = '/Login';
 
         getTasks().then(result => {
-            if (result.success) {
+            if (result.status === 200) {
                 setTasks(result.tasks);
                 setTasksFiltered(result.tasks);
+                return;
+            }
+
+            if (result.status === 401) {
+                window.location.href = '/Login';
                 return;
             }
 

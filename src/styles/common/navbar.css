@@ -11,18 +11,18 @@
     padding: 0.5em;
 }
 
-.task-icon, .calendar-icon, .logout-icon {
+.task-icon, .calendar-icon, .logout-icon, .today-icon {
     color: white;
     transition: transform .2s;
     text-decoration: none;
     font-size: 1.4em;
 }
 
-.task-icon:hover, .calendar-icon:hover, .logout-icon:hover {
+.task-icon:hover, .calendar-icon:hover, .logout-icon:hover, .today-icon:hover {
     transform: scale(1.5);
 }
 
-.task-tooltip, .calendar-tooltip {
+.task-tooltip, .calendar-tooltip, .logout-tooltip, .today-tooltip {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -37,7 +37,7 @@
     margin-left: -60px;
 }
 
-.task-link:hover + span, .calendar-link:hover + span, .logout-link:hover + span { 
+.task-link:hover + span, .calendar-link:hover + span, .logout-link:hover + span, .today-link:hover + span { 
     visibility: visible 
 }
 

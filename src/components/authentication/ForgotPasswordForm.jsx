@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../../styles/forgot-password-form.css';
+import '../../styles/components/authentication/forgot-password-form.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
@@ -11,7 +11,9 @@ export default function ForgotPasswordForm() {
     const [isPageLoading, setIsPageLoading] = useState(false);
 
     const schema = yup.object({
-        email: yup.string().required("Email is mandatory").max(50, 'Email can\'t have more than 50 digits'),
+        email: yup.string().required("Email is mandatory")
+            .max(50, 'Email can\'t have more than 50 digits')
+            .email('Invalid email format'),
     });
 
     const { register, formState: { errors }, handleSubmit, getValues } = useForm({

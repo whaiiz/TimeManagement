@@ -1,6 +1,6 @@
 import React from 'react';
 import ForgotPasswordForm from '../components/authentication/ForgotPasswordForm';
-import '../styles/forgot-password.css';
+import '../styles/pages/forgot-password.css';
 
 export default function ForgotPassword() {
 	return (

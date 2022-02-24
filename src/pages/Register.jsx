@@ -1,6 +1,6 @@
 import React from 'react';
 import RegisterForm from '../components/authentication/RegisterForm';
-import '../styles/register.css';
+import '../styles/pages/register.css';
 
 export default function Register() {
 	return (
