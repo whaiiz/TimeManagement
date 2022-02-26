@@ -6,6 +6,7 @@ let getGetTasksResponse = async (request) => {
 
     if (request.status === 200) {
         let response = await request.json();
+        result.success = true;
         result.tasks = response;
     }
     
