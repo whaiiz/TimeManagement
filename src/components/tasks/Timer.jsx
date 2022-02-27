@@ -35,13 +35,13 @@ export default function TimerComponent() {
     }
 
     useEffect(() => {
-      return () => clearInterval(intervalIdRef.current);
+        return () => clearInterval(intervalIdRef.current);
     }, [])
 
     
     return(
         <section className='timer-container'>
-            <label>{time}</label>
+            <label className='time-left'>{time}</label>
             { isTimerRunning ? <button className='stop-timer' onClick={stopTimer}>Stop</button>:
                 <button className='start-timer' onClick={startTimer}>Start</button>
             }        
