@@ -6,3 +6,20 @@
     align-items: center;
     margin-top: 10vh;
 }
+
+.timer-container, .today-tasks-list {
+    width: 30vw;
+    padding: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+    .timer-container, .today-tasks-list {
+        width: 90vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .timer-container, .today-tasks-list {
+        width: 100vw;
+    }
+}

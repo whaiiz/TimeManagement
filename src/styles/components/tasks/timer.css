@@ -1,5 +1,4 @@
 .timer-container {
-    width: 30vw;
     background-color: #547CC8;
     border-radius: 0.8em;
     display: flex;
@@ -29,16 +28,4 @@
     background-color: rgb(51, 51, 58);
     color: #547CC8;
     cursor: pointer;
-}
-
-@media only screen and (max-width: 1000px) {
-    .login-form {
-        width: 90vw;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .timer-container {
-        width: 100vw;
-    }
 }
