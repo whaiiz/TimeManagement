@@ -1,0 +1,29 @@
+.today-tasks-list {
+    list-style-type: none;
+}
+
+.today-tasks-list li {
+    border-left: 0.5em solid #547CC8;
+    padding: 1em;
+    margin-bottom: 2px;
+    background-color: white;
+}
+
+.today-tasks-list .today-task-operations {
+    float: right;
+}
+
+.today-tasks-list .fa-check-circle {
+    color: green;
+    font-size: 1.5rem;
+    transition: transform .2s;
+}
+
+.today-tasks-list .task-done {
+    text-decoration: line-through;
+}
+
+.today-tasks-list .fa-check-circle:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
