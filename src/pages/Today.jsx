@@ -22,8 +22,10 @@ export default function Today() {
     return(
         <React.Fragment>
             <Navbar />
-            <TimerComponent />
-            <TodayTasksList todaysTasks = {todaysTasks} />
+            <section className='today-container'>
+                <TimerComponent />
+                <TodayTasksList todaysTasks={todaysTasks} className='timer' />
+            </section>
         </React.Fragment>
     );
 }
