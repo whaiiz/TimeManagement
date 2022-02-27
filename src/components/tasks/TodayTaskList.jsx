@@ -17,12 +17,14 @@ export default function TodayTasksList() {
     
     return (
         <React.Fragment>
-            <ul>
+            <ul className='today-tasks-list'>
                 {todayTasks.map((t, i) => {
                     return (
                         <li key={i}>
-                            <label>{t.name}</label>
-                            {t.status === 'Active' && <i className="fas fa-check-circle" onClick={e => completeTask(e, t.id)}></i>}
+                            <label className={t.status === 'Done' ? 'task-done': ''}>{t.name}</label>
+                            <section className='today-task-operations'>
+                                {t.status !== 'Done' && <i className="fas fa-check-circle" onClick={e => completeTask(e, t.id)}></i>}
+                            </section>
                         </li>
                     )       
                 })}
