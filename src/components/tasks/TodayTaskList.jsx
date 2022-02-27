@@ -11,7 +11,6 @@ export default function TodayTasksList() {
 
     useEffect(() => {
         getTasks().then(response => {
-            console.log(response);
             if (response.success) setTodayTasks(response.tasks);
         });
     }, [])
