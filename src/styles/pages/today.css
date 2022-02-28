@@ -12,14 +12,23 @@
     padding: 0;
 }
 
+.today-container .auto-complete input {
+    width: 30vw;
+    padding: 0.5em 0.3em;
+    /* border-radius: 1.5em; */
+    border-style: solid;
+    min-width: 30vw;
+    margin-top: 1em;
+}
+
 @media only screen and (max-width: 1000px) {
-    .timer-container, .today-tasks-list {
+    .timer-container, .today-tasks-list, .add-today-task {
         width: 90vw;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .timer-container, .today-tasks-list {
+    .timer-container, .today-tasks-list, .add-today-task {
         width: 100vw;
     }
 }
