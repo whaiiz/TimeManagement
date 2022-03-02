@@ -4,6 +4,8 @@ import TimerComponent from '../components/tasks/Timer'
 import TodayTasksList from '../components/tasks/TodayTaskList'
 import { getTasks} from '../business-layer/tasks';
 import { getUserLoggedInToken } from  '../business-layer/authentication';
+import { createTask } from '../business-layer/tasks';
+import { isDateTimeToday } from '../utils/date-converter';
 import '../styles/pages/today.css'
 import AutoCompleteTaskInput from '../components/tasks/AutoCompleteTaskInput';
 
@@ -11,29 +13,46 @@ export default function Today() {
     const [todaysTasks, setTodaysTasks] = useState([]);
     const [tasks, setTasks] = useState([]);
 
-    const onTodayTaskClick = (id) => {
+    const createNewTaskForToday = async name => {
+        const result = await createTask({
+            name: name,
+            dateTime: new Date(),
+            status: 'ToDo'
+        });
 
+        if (result.success) fetchTasks();
+    }
+
+    const addExistingTaskForToday = id => {
+        const task = tasks.find(t => t.id === id);
+
+        if (!task) return;
+
+        const updatedTodayTasks = [...todaysTasks];
+        updatedTodayTasks.push(task);
+    }
+
+    const fetchTasks = _ => {
+        getTasks().then(r => {
+            if(r.status === 200) {
+                setTasks(r.tasks);
+                setTodaysTasks(r.tasks.filter(t => isDateTimeToday(t.dateTime)));
+            }
+        });
     }
 
     useEffect(() => {
         if (!getUserLoggedInToken()) window.location.href = '/Login';
-
-        getTasks().then(r => {
-            if(r.status === 200) {
-                setTasks(r.tasks);
-                setTodaysTasks(r.tasks);
-            }
-        });
-    }, [setTodaysTasks])
+        fetchTasks();
+    }, [])
     
     return(
         <React.Fragment>
             <Navbar />
             <section className='today-container'>
                 <TimerComponent />
-                <AutoCompleteTaskInput collection={tasks} onItemClick={onTodayTaskClick} addNewTaskCb={_ => {}}/>
-                {/* <input className="add-today-task" type="text" placeholder="Add new task for today" /> */}
-                <TodayTasksList todaysTasks={todaysTasks} className='timer' />
+                <AutoCompleteTaskInput collection={tasks} onItemClick={addExistingTaskForToday} addNewTaskCb={createNewTaskForToday}/>
+                <TodayTasksList tasks={todaysTasks} />
             </section>
         </React.Fragment>
     );

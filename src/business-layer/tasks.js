@@ -1,7 +1,7 @@
 import { getTasksRequest, createTaskRequest, updateTaskRequest, updateTaskDateRequest, 
     updateTaskStatusRequest, deleteTaskRequest}  from '../repositories/task-repository';
 
-let getGetTasksResponse = async (request) => {
+const getGetTasksResponse = async (request) => {
     let result = { success: false, tasks: [], status: request.status };
 
     if (request.status === 200) {
@@ -22,10 +22,23 @@ export const getTasks = async _ => {
     }
 }
 
+
+const getCreateTaskResponse = async request => {
+    let result = { success: false, task: {}}
+
+    if (request.status === 200) {
+        let response = await request.json();
+        result.success = true;
+        result.task = response;
+    }
+
+    return result;
+}
+
 export const createTask = async task => {
     try {
         let request = await createTaskRequest(task);
-        return request.status === 200 ? true : false;
+        return await getCreateTaskResponse(request);
     } catch(ex) { return false; }
 }
 

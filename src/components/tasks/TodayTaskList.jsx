@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { getTasks } from '../../business-layer/tasks'
+import React, { useState } from 'react'
 import '../../styles/components/tasks/today-task-list.css'
 
-export default function TodayTasksList() {
-    const [todayTasks, setTodayTasks] = useState([]);
-    
+export default function TodayTasksList({tasks}) {
     const completeTask = (id) => {
         console.log(id); 
     }
-
-    useEffect(() => {
-        getTasks().then(response => {
-            if (response.success) setTodayTasks(response.tasks);
-        });
-    }, [])
-    
+   
     return (
         <React.Fragment>
             <ul className='today-tasks-list'>
-                {todayTasks.map((t, i) => {
+                {tasks.map((t, i) => {
                     return (
                         <li key={i}>
                             <label className={t.status === 'Done' ? 'task-done': ''}>{t.name}</label>
