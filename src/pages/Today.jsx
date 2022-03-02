@@ -5,7 +5,7 @@ import TodayTasksList from '../components/tasks/TodayTaskList'
 import { getTasks} from '../business-layer/tasks';
 import { getUserLoggedInToken } from  '../business-layer/authentication';
 import { createTask, updateTaskStatus } from '../business-layer/tasks';
-import { isDateTimeToday } from '../utils/date-converter';
+import { isDateTimeToday } from '../utils/date-time-converter';
 import '../styles/pages/today.css'
 import AutoCompleteTaskInput from '../components/tasks/AutoCompleteTaskInput';
 

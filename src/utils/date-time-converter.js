@@ -8,3 +8,7 @@ export const dateTimeToDate = (dateTime) => {
 export const isDateTimeToday = dateTime => {
     return dateTimeToDate(dateTime) === dateTimeToDate(new Date());
 }
+
+export const secondsToTime = seconds => {
+    return new Date(seconds * 1000).toISOString().substr(11, 8)
+}

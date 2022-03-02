@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { secondsToTime } from '../../utils/date-time-converter'
 import '../../styles/components/tasks/timer.css'
 
 export default function TimerComponent() {
-    const DEFAULT_TIME = 2;
+    const DEFAULT_TIME = 129;
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [time, setTime] = useState(DEFAULT_TIME);
     const [intervalId, setIntervalId] = useState('');
@@ -29,6 +30,11 @@ export default function TimerComponent() {
         setIntervalId(_ => newIntervalId);
     }
 
+    const pauseTimer = _ => {
+        clearInterval(intervalIdRef.current);
+        setIsTimerRunning(false);
+    }
+
     const stopTimer = _ => {
         clearInterval(intervalIdRef.current);
         setIsTimerRunning(false);
@@ -41,8 +47,8 @@ export default function TimerComponent() {
     
     return(
         <section className='timer-container'>
-            <label className='time-left'>{time}</label>
-            { isTimerRunning ? <button className='stop-timer' onClick={stopTimer}>Stop</button>:
+            <label className='time-left'>{secondsToTime(time)}</label>
+            { isTimerRunning ? <button className='stop-timer' onClick={pauseTimer}>Pause</button>:
                 <button className='start-timer' onClick={startTimer}>Start</button>
             }        
         </section>
