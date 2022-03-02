@@ -6,9 +6,5 @@ export const dateTimeToDate = (dateTime) => {
 }
 
 export const isDateTimeToday = dateTime => {
-    const date = dateTimeToDate(dateTime);
-    const todayDate = dateTimeToDate(new Date());
-
-    console.log(date === todayDate)
-    return date === todayDate;
+    return dateTimeToDate(dateTime) === dateTimeToDate(new Date());
 }

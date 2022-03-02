@@ -4,7 +4,7 @@ import TimerComponent from '../components/tasks/Timer'
 import TodayTasksList from '../components/tasks/TodayTaskList'
 import { getTasks} from '../business-layer/tasks';
 import { getUserLoggedInToken } from  '../business-layer/authentication';
-import { createTask } from '../business-layer/tasks';
+import { createTask, updateTaskStatus } from '../business-layer/tasks';
 import { isDateTimeToday } from '../utils/date-converter';
 import '../styles/pages/today.css'
 import AutoCompleteTaskInput from '../components/tasks/AutoCompleteTaskInput';
@@ -32,6 +32,11 @@ export default function Today() {
         updatedTodayTasks.push(task);
     }
 
+    const completeTodayTask = async id => {
+        const success = await updateTaskStatus(id, 'Done');
+        if (success) fetchTasks();
+    }
+
     const fetchTasks = _ => {
         getTasks().then(r => {
             if(r.status === 200) {
@@ -51,8 +56,13 @@ export default function Today() {
             <Navbar />
             <section className='today-container'>
                 <TimerComponent />
-                <AutoCompleteTaskInput collection={tasks} onItemClick={addExistingTaskForToday} addNewTaskCb={createNewTaskForToday}/>
-                <TodayTasksList tasks={todaysTasks} />
+                <AutoCompleteTaskInput 
+                    collection={tasks} 
+                    onItemClick={addExistingTaskForToday} 
+                    addNewTaskCb={createNewTaskForToday}/>
+                <TodayTasksList 
+                    tasks={todaysTasks} 
+                    completeTaskCb={completeTodayTask} />
             </section>
         </React.Fragment>
     );
