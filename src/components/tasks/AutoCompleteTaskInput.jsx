@@ -12,6 +12,11 @@ export default function AutoCompleteInput({collection, onItemClick, addNewTaskCb
         setSuggestions(getSuggestions(value));
     }
 
+    const addNewTask = taskSearched => {
+        addNewTaskCb(taskSearched);
+        setTaskSearched('');
+    }
+
     const getSuggestions = (searchedValue) => {
         return collection.filter(t => t.name.toLowerCase().includes(searchedValue.toLowerCase()));
     }
@@ -25,7 +30,8 @@ export default function AutoCompleteInput({collection, onItemClick, addNewTaskCb
             <section className="auto-complete">
                 <input type="text" onInput={e => onSearchTaskInput(e)}
                                    onClick={_ => setAreSuggestionsVisible(true)}
-                                   onBlur={_ => setTimeout(_ => setAreSuggestionsVisible(false), 100)} />
+                                   onBlur={_ => setTimeout(_ => setAreSuggestionsVisible(false), 100)}
+                                   placeholder="Search task" />
                 { areSuggestionsVisible && <article className="auto-complete-items">
                     {
                         suggestions.map(s => {
@@ -36,7 +42,7 @@ export default function AutoCompleteInput({collection, onItemClick, addNewTaskCb
                             )
                         })
                     }
-                   { taskSearched.length > 0 && <div onClick={_ => addNewTaskCb(taskSearched)}>
+                    { taskSearched.length > 0 && <div onClick={_ => addNewTask(taskSearched)}>
                         <label>Add new task named {taskSearched}</label>
                     </div> }
                 </article> }
