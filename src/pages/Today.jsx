@@ -40,7 +40,7 @@ export default function Today() {
     const fetchTasks = _ => {
         getTasks().then(r => {
             if(r.status === 200) {
-                setTasks(r.tasks);
+                setTasks(r.tasks.filter(t => !isDateTimeToday(t.dateTime)));
                 setTodaysTasks(r.tasks.filter(t => isDateTimeToday(t.dateTime)));
             }
         });
