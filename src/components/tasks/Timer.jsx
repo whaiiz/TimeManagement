@@ -47,6 +47,11 @@ export default function TimerComponent() {
     
     return(
         <section className='timer-container'>
+            <article className='timer-config'>
+                <a href='#' className='focus'>Focus</a>
+                <a href='#' className='break'>Break</a>
+                <a href='#' className='settings fas fa-cog'></a>
+            </article>
             <label className='time-left'>{secondsToTime(time)}</label>
             { isTimerRunning ? <button className='stop-timer' onClick={pauseTimer}>Pause</button>:
                 <button className='start-timer' onClick={startTimer}>Start</button>
