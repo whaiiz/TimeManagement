@@ -6,6 +6,23 @@
     align-items: center;
 }
 
+.timer-config {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.timer-config a {
+    color: white;
+    text-decoration: none;
+    margin-right: 1em;
+}
+
+/* .timer-config .settings {
+    margin-left: auto;
+} */
+
 .time-left {
     display: block;
     font-size: 4em;
