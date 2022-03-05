@@ -10,18 +10,23 @@
     color: white;
     display: flex;
     justify-content: center;
-    margin-top: 1em;
 }
 
-.timer-config a {
+.timer-config span {
     color: white;
     text-decoration: none;
-    margin-right: 1em;
+    font-size: 1.1em;
+    padding: 0.8em;
 }
 
-/* .timer-config .settings {
-    margin-left: auto;
-} */
+.timer-selected {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.timer-config span:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
 
 .time-left {
     display: block;
