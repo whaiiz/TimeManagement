@@ -4,7 +4,7 @@ import { errorMessage } from '../utils/sweet-alert';
 import TaskTableWithPagination from '../components/tasks/TaskTableWithPagination';
 import AutoCompleteInput from '../components/common/AutoCompleteInput';
 import Navbar from '../components/common/Navbar'; 
-import { dateTimeToDate } from '../utils/date-converter';
+import { dateTimeToDate } from '../utils/date-time-converter';
 import { getUserLoggedInToken } from '../business-layer/authentication';
 import '../styles/pages/planning.css';
 

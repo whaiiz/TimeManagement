@@ -1,6 +1,6 @@
 :root {
-    --modal-duration: 1s;
-    --modal-color: #547CC8;
+    --modal-duration: .4s;
+    --modal-color: white;
   }
   
   .modal {
@@ -26,7 +26,6 @@
   .modal-header {
     background: var(--modal-color);
     padding: 0.1vh 1vw;
-    color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
