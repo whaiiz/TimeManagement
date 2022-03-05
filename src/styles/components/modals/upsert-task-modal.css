@@ -27,3 +27,12 @@
 .upsert-task-form select {
     height: 1.9rem;
 }
+
+.upsert-button {
+    background-color: #547CC8;
+    border: none;
+    color: white;
+    padding: 0.5em 0.7em;
+    border-radius: 0.8em;
+    float: right;
+}

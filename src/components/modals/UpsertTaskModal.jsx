@@ -107,7 +107,8 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
                 Footer={
                     <article>
                         <button type="button" onClick={closeCallback}>Close</button>                
-                        <button onClick={handleSubmit(onSubmit)}>{task.id ? "Update" : "Create"}</button>
+                        <button className='upsert-button'onClick={handleSubmit(onSubmit)}>
+                            {task.id ? "Update" : "Create"}</button>
                     </article>
                 }
             />
