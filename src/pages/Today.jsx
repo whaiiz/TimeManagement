@@ -4,7 +4,7 @@ import TimerComponent from '../components/tasks/Timer'
 import TodayTasksList from '../components/tasks/TodayTaskList'
 import { getTasks} from '../business-layer/tasks';
 import { getUserLoggedInToken } from  '../business-layer/authentication';
-import { createTask, updateTaskStatus } from '../business-layer/tasks';
+import { createTask, updateTaskStatus, updateTaskDate } from '../business-layer/tasks';
 import { isDateTimeToday } from '../utils/date-time-converter';
 import '../styles/pages/today.css'
 import AutoCompleteTaskInput from '../components/tasks/AutoCompleteTaskInput';
@@ -25,11 +25,7 @@ export default function Today() {
 
     const addExistingTaskForToday = id => {
         const task = tasks.find(t => t.id === id);
-
-        if (!task) return;
-
-        const updatedTodayTasks = [...todaysTasks];
-        updatedTodayTasks.push(task);
+        if (task) updateTaskDate(id, new Date().toISOString()).then(_ => fetchTasks());
     }
 
     const completeTodayTask = async id => {
