@@ -1,17 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { secondsToTime } from '../../utils/date-time-converter'
+import { secondsToHoursMinutesSecondsFormat } from '../../utils/date-time-converter'
 import { errorMessage } from '../../utils/sweet-alert'
 import { getUser } from '../../business-layer/user'
 import '../../styles/components/tasks/timer.css'
+import TimerSettingsModal from '../modals/TimerSettingsModal'
 
 export default function TimerComponent() {
-    const [isTimerRunning, setIsTimerRunning] = useState(false);
-    const [time, setTime] = useState(1500);
     const [intervalId, setIntervalId] = useState('');
+    const intervalIdRef = useRef(intervalId);
+    
+    const [time, setTime] = useState(1500);
     const [defaultBreakTime, setDefaultBreakTime] = useState(300);
     const [defaultFocusTime, setDefaultFocusTime] = useState(1500);
+
     const [isFocusTime, setIsFocusTime] = useState(true);
-    const intervalIdRef = useRef(intervalId);
+    const [isTimerSettingModalVisible, setIsTimerSettingModalVisible] = useState(false);
+    const [isTimerRunning, setIsTimerRunning] = useState(false);
 
     const onSecondPassedTimer = () => {
         setTime(previousTime =>  { 
@@ -56,13 +60,21 @@ export default function TimerComponent() {
         stopTimer();
     }
 
+    const onSavedSettings = (updatedDefaultBreakTime, updatedDefaultFocusTime) => {
+        setDefaultBreakTime(updatedDefaultBreakTime);
+        setDefaultFocusTime(updatedDefaultFocusTime);
+        setIsTimerSettingModalVisible(false);
+
+        if (isFocusTime) setTime(updatedDefaultFocusTime);
+        else setTime(updatedDefaultBreakTime);
+    }
+
     useEffect(() => {
         getUser().then(user => {
             if (!user) errorMessage("User not logged in").then(_ => window.location.href = '/Login');
-
-            if (user.defaultBreakTime && user.defaultFocusTime) {
+            if (user.defaultBreakTime) setDefaultBreakTime(user.defaultBreakTime);
+            if (user.defaultFocusTime) {
                 setTime(user.defaultFocusTime);
-                setDefaultBreakTime(user.defaultBreakTime);
                 setDefaultFocusTime(user.defaultFocusTime);
             }
         })
@@ -71,18 +83,26 @@ export default function TimerComponent() {
     }, [])
 
     return(
-        <section className='timer-container'>
-            <article className='timer-config'>
-                <span className={ isFocusTime ? 'focus timer-selected': 'focus'} 
-                    onClick={selectFocusTime}>Focus</span>
-                <span className={ !isFocusTime ? 'break timer-selected': 'focus'}
-                    onClick={selectBreakTime}>Break</span>
-                <span className='settings fas fa-cog'></span>
-            </article>
-            <label className='time-left'>{secondsToTime(time)}</label>
-            { isTimerRunning ? <button className='stop-timer' onClick={pauseTimer}>Pause</button>:
-                <button className='start-timer' onClick={startTimer}>Start</button>
-            }        
-        </section>
+        <React.Fragment>
+            <section className='timer-container'>
+                <article className='timer-config'>
+                    <span className={ isFocusTime ? 'focus timer-selected': 'focus'} 
+                        onClick={selectFocusTime}>Focus</span>
+                    <span className={ !isFocusTime ? 'break timer-selected': 'focus'}
+                        onClick={selectBreakTime}>Break</span>
+                    <span className='settings fas fa-cog' 
+                        onClick={_ => setIsTimerSettingModalVisible(true)}></span>
+                </article>
+                <label className='time-left'>{secondsToHoursMinutesSecondsFormat(time)}</label>
+                { isTimerRunning ? <button className='stop-timer' onClick={pauseTimer}>Pause</button>:
+                    <button className='start-timer' onClick={startTimer}>Start</button>
+                }        
+            </section>
+            <TimerSettingsModal 
+                isVisible={isTimerSettingModalVisible}
+                closeModalCallback={_ => setIsTimerSettingModalVisible(false)}
+                onSavedSettings={onSavedSettings}
+                userSettings={{defaultBreakTime, defaultFocusTime}}/>
+        </React.Fragment>
     )
 }
