@@ -1,0 +1,43 @@
+.modal-title {
+    display: inline;
+    font-size: 20px;
+}
+
+.close-timer-settings {
+    margin-left: auto;
+    font-size: 30px;
+    color: black;
+    margin-top: 0.1em;
+}
+  
+.close-timer-settings:hover,
+.close-timer-settings:focus {
+    text-decoration: none;
+    cursor: pointer;
+    color: #547CC8;
+}
+
+.save-timer-settings {
+    background-color: #547CC8;
+    border: none;
+    color: white;
+    padding: 0.5em 0.7em;
+    border-radius: 0.5em;
+    margin-left: auto;    
+}
+
+.save-timer-settings:hover {
+    background-color: rgb(51, 51, 58);
+    color: #547CC8;
+    cursor: pointer;
+}
+
+.default-break-time, 
+.default-focus-time {
+    display: block;
+    width: 100%;
+}
+
+.timer-settings-form article {
+    margin-bottom: 1em;
+}
