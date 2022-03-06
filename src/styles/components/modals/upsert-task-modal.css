@@ -33,6 +33,30 @@
     border: none;
     color: white;
     padding: 0.5em 0.7em;
-    border-radius: 0.8em;
-    float: right;
+    border-radius: 0.5em;
+    margin-left: auto;  
+}
+
+.upsert-button:hover {
+    background-color: rgb(51, 51, 58);
+    color: #547CC8;
+    cursor: pointer;
+}
+
+.upsert-task-form .modal-title {
+    font-size: 20px;
+}
+
+.close-upsert-task {
+    margin-left: auto;
+    font-size: 30px;
+    color: black;
+    margin-top: 0.1em;
+}
+  
+.close-upsert-task:hover,
+.close-upsert-task:focus {
+    text-decoration: none;
+    cursor: pointer;
+    color: #547CC8;
 }
