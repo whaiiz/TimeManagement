@@ -8,9 +8,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 export default function UpsertTaskModal({isVisible, closeCallback, task}) {
-
     const schema = yup.object({
-        name: yup.string().required("Name is mandatory").max(20, 'Name can\'t have more than 20 digits'),
+        name: yup.string()
+            .required("Name is mandatory")
+            .max(20, 'Name can\'t have more than 20 digits'),
         dateTime: yup.date().required("Date is mandatory")
     }).required();
 
@@ -69,7 +70,12 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
     return (
         <form className="upsert-task-form">
             <Modal isVisible={isVisible}
-                Header={<h1>{getModalTitle()}</h1>}
+                Header={
+                    <React.Fragment>
+                        <h1 className='modal-title'>{getModalTitle()}</h1>
+                        <span className='close-upsert-task' onClick={closeCallback}>&times;</span>
+                    </React.Fragment>
+                }
                 Body={
                     <React.Fragment>
                         <input type="text" name="id" {...register("id")} hidden/>
@@ -105,11 +111,8 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
                     </React.Fragment>
                 }
                 Footer={
-                    <article>
-                        <button type="button" onClick={closeCallback}>Close</button>                
-                        <button className='upsert-button'onClick={handleSubmit(onSubmit)}>
-                            {task.id ? "Update" : "Create"}</button>
-                    </article>
+                    <button className='upsert-button'onClick={handleSubmit(onSubmit)}>
+                        {task.id ? "Update" : "Create"}</button>
                 }
             />
         </form>
