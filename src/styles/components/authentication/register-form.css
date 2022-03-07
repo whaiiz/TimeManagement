@@ -3,9 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 20vw;
     border-radius: 0.8em;
     padding: 2em;
+    margin: 1em;
 }
 
 .register-form > article {
@@ -59,15 +59,3 @@
 }
 
 .login:hover { color: #547CC8; }
-
-@media only screen and (max-width: 1000px) {
-    .register-form {
-        width: 80vw;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .register-form {
-        width: 100vw;
-    }
-}

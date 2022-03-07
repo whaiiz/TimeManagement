@@ -7,9 +7,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 20vw;
     border-radius: 0.8em;
     padding: 2em;
+    margin: 1em;
 }
 
 .login-form > article {
@@ -71,16 +71,4 @@
 .forgot-password {
     float: right;
     margin-top: 0.5rem;
-}
-
-@media only screen and (max-width: 1000px) {
-    .login-form {
-        width: 80vw;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .login-form {
-        width: 100vw;
-    }
 }
