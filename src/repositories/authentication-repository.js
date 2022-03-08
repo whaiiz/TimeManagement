@@ -10,6 +10,7 @@ export const loginRequest = (username, password) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(user)
     });
 }
