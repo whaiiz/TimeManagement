@@ -42,8 +42,6 @@ export default function TaskList() {
     useEffect(() => setTasksFiltered(tasks), [tasks])
 
     useEffect(() => {
-        if (!getUserLoggedInToken()) window.location.href = '/Login';
-
         getTasks().then(result => {
             if (result.status === 200) {
                 setTasks(result.tasks);

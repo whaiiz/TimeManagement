@@ -1,4 +1,4 @@
-import { loginRequest, registerRequest,  forgotPasswordRequest, resetPasswordRequest } from '../repositories/authentication-repository';
+import { loginRequest, registerRequest, forgotPasswordRequest, resetPasswordRequest } from '../repositories/authentication-repository';
 
 const getLoginResponse = (request, requestResponse) => {
     let result = { isLoggedIn: false, message: requestResponse }
@@ -62,8 +62,5 @@ export const resetPassword = async (newPassword, token) => {
         return { success: false, message: 'Unexpected error! Try again later'}
     }
 }
-
-// TO DO : Change to http only cookie
-export const getUserLoggedInToken = _ => localStorage.getItem("auth-token");
 
 export const logout = _ => localStorage.removeItem("auth-token");

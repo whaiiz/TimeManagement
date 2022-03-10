@@ -3,7 +3,6 @@ import Navbar from '../components/common/Navbar'
 import TimerComponent from '../components/tasks/Timer'
 import TodayTasksList from '../components/tasks/TodayTaskList'
 import { getTasks} from '../business-layer/tasks';
-import { getUserLoggedInToken } from  '../business-layer/authentication';
 import { createTask, updateTaskStatus, updateTaskDate } from '../business-layer/tasks';
 import { isDateTimeToday } from '../utils/date-time-converter';
 import '../styles/pages/today.css'
@@ -43,7 +42,6 @@ export default function Today() {
     }
 
     useEffect(() => {
-        if (!getUserLoggedInToken()) window.location.href = '/Login';
         fetchTasks();
     }, [])
     

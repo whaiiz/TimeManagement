@@ -1,11 +1,9 @@
-import { getUserLoggedInToken } from "../business-layer/authentication";
-
 const baseUrl = 'https://localhost:5001/api';
 
 export const getTasksRequest = _ => {
     return fetch(`${baseUrl}/Task`, {
         method: 'GET',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }
 
@@ -15,8 +13,8 @@ export const createTaskRequest = task => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getUserLoggedInToken()}`
         },
+        credentials: 'include',
         body: JSON.stringify(task)
     });
 }
@@ -27,8 +25,8 @@ export const updateTaskRequest = task => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getUserLoggedInToken()}`
         },
+        credentials: 'include',
         body: JSON.stringify(task)
     });
 }
@@ -38,7 +36,7 @@ export const updateTaskDateRequest = (id, date) => {
 
     return fetch(baseUrl + `/Task/UpdateDate${args}`, {
         method: 'PUT',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }
 
@@ -47,13 +45,13 @@ export const updateTaskStatusRequest = (id, status) => {
 
     return fetch(baseUrl + `/Task/UpdateStatus${args}`, {
         method: 'PUT',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }
 
 export const deleteTaskRequest = (id) => {
     return fetch(baseUrl + `/Task/${id}`, {
         method: 'DELETE',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }
