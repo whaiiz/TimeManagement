@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import Navbar from '../components/common/Navbar'
-import TimerComponent from '../components/tasks/Timer'
-import TodayTasksList from '../components/tasks/TodayTaskList'
-import { getTasks} from '../business-layer/tasks';
+import React, {useEffect, useState} from 'react';
+import Navbar from '../components/common/Navbar';
+import TimerComponent from '../components/tasks/Timer';
+import TodayTasksList from '../components/tasks/TodayTaskList';
+import { getTasks } from '../business-layer/tasks/get-tasks';
 import { createTask, updateTaskStatus, updateTaskDate } from '../business-layer/tasks';
 import { isDateTimeToday } from '../utils/date-time-converter';
-import '../styles/pages/today.css'
+import '../styles/pages/today.css';
 import AutoCompleteTaskInput from '../components/tasks/AutoCompleteTaskInput';
+import { errorMessage } from '../utils/sweet-alert';
 
 export default function Today() {
     const [todaysTasks, setTodaysTasks] = useState([]);
@@ -34,10 +35,14 @@ export default function Today() {
 
     const fetchTasks = _ => {
         getTasks().then(r => {
-            if(r.status === 200) {
+            if (r.userNotLoggedIn) window.location.href = '/Login';
+
+            if (r.success) {
                 setTasks(r.tasks.filter(t => !isDateTimeToday(t.dateTime)));
                 setTodaysTasks(r.tasks.filter(t => isDateTimeToday(t.dateTime)));
-            }
+            } else {
+                errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
+            } 
         });
     }
 

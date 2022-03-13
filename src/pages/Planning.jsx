@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { getTasks, updateTaskDate as handleUpdateTaskDate } from '../business-layer/tasks';
+import { updateTaskDate as handleUpdateTaskDate } from '../business-layer/tasks';
+import { getTasks } from '../business-layer/tasks/get-tasks';
 import { errorMessage } from '../utils/sweet-alert';
 import TaskTableWithPagination from '../components/tasks/TaskTableWithPagination';
 import AutoCompleteInput from '../components/common/AutoCompleteInput';
@@ -28,13 +29,10 @@ export default function Planning() {
     }
 
     useEffect(() => {
-        getTasks().then(result => {
-            if (result.status === 200) {
-                setTasks(result.tasks);
-                return;
-            }
-            
-            errorMessage('Error', 'Error gettings the tasks please try again!').then(_ => window.location.reload());
+        getTasks().then(r => {
+            if (r.userNotLoggedIn) window.location.href = '/Login';
+            if (r.success) setTasks(r.tasks);
+            else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
         })
     }, []);
 
