@@ -60,3 +60,18 @@
     cursor: pointer;
     color: #547CC8;
 }
+
+@media only screen and (max-width: 1000px) {
+    .upsert-task-form div {
+        display: block;
+    }
+
+    .upsert-task-form input {
+        margin-top: 3px;
+    }
+
+    .task-status-container, .task-name-container, .task-date-container {
+        width: 100%;
+        margin-top: 1em;
+    }
+}

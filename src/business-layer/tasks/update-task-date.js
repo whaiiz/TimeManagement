@@ -27,7 +27,7 @@ const responseHandlers = {
 
 export const updateTaskDate = async (id, date) => {
     try {
-        let request = await updateTaskDateRequest();
+        let request = await updateTaskDateRequest(id, date);
         let handleResponse = responseHandlers[request.status];
         return handleResponse ? await handleResponse(request, id, date) : unknownErrorResponse;
     } catch(ex) { return unknownErrorResponse; }

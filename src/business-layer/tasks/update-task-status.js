@@ -25,10 +25,10 @@ const responseHandlers = {
     500 : handleInternalServerErrorResponse
 }
 
-export const updateTaskStatus = async (id, date) => {
+export const updateTaskStatus = async (id, status) => {
     try {
-        let request = await updateTaskStatusRequest();
+        let request = await updateTaskStatusRequest(id, status);
         let handleResponse = responseHandlers[request.status];
-        return handleResponse ? await handleResponse(request, id, date) : unknownErrorResponse;
+        return handleResponse ? await handleResponse(request, id, status) : unknownErrorResponse;
     } catch(ex) { return unknownErrorResponse; }
 }
