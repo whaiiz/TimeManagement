@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { getTasks, updateTaskDate as handleUpdateTaskDate } from '../business-layer/tasks';
+import { updateTaskDate } from '../business-layer/tasks/update-task-date';
+import { getTasks } from '../business-layer/tasks/get-tasks';
 import { errorMessage } from '../utils/sweet-alert';
 import TaskTableWithPagination from '../components/tasks/TaskTableWithPagination';
 import AutoCompleteInput from '../components/common/AutoCompleteInput';
 import Navbar from '../components/common/Navbar'; 
 import { dateTimeToDate } from '../utils/date-time-converter';
-import { getUserLoggedInToken } from '../business-layer/authentication';
 import '../styles/pages/planning.css';
 
 export default function Planning() {
@@ -13,31 +13,28 @@ export default function Planning() {
     const [planningDate, setPlanningDate] = useState(dateTimeToDate(new Date()));
     const [planningTasks, setPlanningTasks] = useState([]);
 
-    const updateTaskDate = async (id, date) => {
-        if (await handleUpdateTaskDate(id, date)) {
+    const handleUpdateTaskDate = async (id, date) => {
+        let response = await updateTaskDate(id, date)
+
+        if (response.userNotLoggedIn) window.location.href = '/Login';
+
+        if (response.success) {
             let tasksCopy = [...tasks];
             let updatedTask = tasksCopy.find(t => t.id === id);
 
             updatedTask.dateTime = date;
             tasksCopy = tasksCopy.map(t => t.id !== id ? t : updatedTask);
             setTasks(tasksCopy);
-
-            return;
+        } else {
+            errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
         }
-
-        errorMessage('Error', 'Error updating task, please try again!')
     }
 
     useEffect(() => {
-        if (!getUserLoggedInToken()) window.location.href = '/Login';
-
-        getTasks().then(result => {
-            if (result.status === 200) {
-                setTasks(result.tasks);
-                return;
-            }
-            
-            errorMessage('Error', 'Error gettings the tasks please try again!').then(_ => window.location.reload());
+        getTasks().then(r => {
+            if (r.userNotLoggedIn) window.location.href = '/Login';
+            if (r.success) setTasks(r.tasks);
+            else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
         })
     }, []);
 
@@ -52,7 +49,7 @@ export default function Planning() {
                 <article className='name'>
                     <AutoCompleteInput className="name"
                         collection={tasks.filter(t => dateTimeToDate(t.dateTime) !== planningDate)} 
-                        onItemClick={id => updateTaskDate(id, planningDate)}/>
+                        onItemClick={id => handleUpdateTaskDate(id, planningDate)}/>
                 </article>
                 <article className="date">
                     <input type="date" value={planningDate} onChange={e => setPlanningDate(e.target.value)}/>

@@ -1,0 +1,7 @@
+{
+    "APIS": {
+      "TASK_API": "https://localhost:5001/api/Task",
+      "USER_API": "https://localhost:5001/api/User",
+      "AUTHENTICATION_API": "https://localhost:5001/api/Authentication"
+    }
+}

@@ -1,10 +1,10 @@
-import { loginRequest, registerRequest,  forgotPasswordRequest, resetPasswordRequest } from '../repositories/authentication-repository';
+import { loginRequest, registerRequest, forgotPasswordRequest, 
+    resetPasswordRequest, refreshTokenRequest } from '../repositories/authentication-repository';
 
 const getLoginResponse = (request, requestResponse) => {
     let result = { isLoggedIn: false, message: requestResponse }
 
     if (request.status === 200) {
-        localStorage.setItem("auth-token", requestResponse);
         result.isLoggedIn = true;
         result.message = "Login success";
     }
@@ -63,7 +63,13 @@ export const resetPassword = async (newPassword, token) => {
     }
 }
 
-// TO DO : Change to http only cookie
-export const getUserLoggedInToken = _ => localStorage.getItem("auth-token");
+export const refreshToken = async () => {
+    try {
+        let request = await refreshTokenRequest();
+        return await request.json();
+    } catch(ex) {
+        return { success: false, message: 'Unexpected error! Try again later'}
+    }
+}
 
 export const logout = _ => localStorage.removeItem("auth-token");

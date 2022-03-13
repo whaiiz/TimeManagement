@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { getTasks } from '../business-layer/tasks';
-import { getUserLoggedInToken } from '../business-layer/authentication';
+import { getTasks } from '../business-layer/tasks/get-tasks';
 import { errorMessage } from '../utils/sweet-alert';
 import '../styles/pages/task-list.css';
 import UpsertTaskModal from '../components/modals/UpsertTaskModal';
@@ -42,21 +41,15 @@ export default function TaskList() {
     useEffect(() => setTasksFiltered(tasks), [tasks])
 
     useEffect(() => {
-        if (!getUserLoggedInToken()) window.location.href = '/Login';
+        getTasks().then(r => {
+            if (r.userNotLoggedIn) window.location.href = '/Login';
 
-        getTasks().then(result => {
-            if (result.status === 200) {
-                setTasks(result.tasks);
-                setTasksFiltered(result.tasks);
-                return;
-            }
-
-            if (result.status === 401) {
-                window.location.href = '/Login';
-                return;
-            }
-
-            errorMessage('Error', 'Error gettings the tasks please try again!').then(_ => window.location.reload());
+            if (r.success) {
+                setTasks(r.tasks);
+                setTasksFiltered(r.tasks);
+            } else {
+                errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
+            } 
         });
     }, []);
 

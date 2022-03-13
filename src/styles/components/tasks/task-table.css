@@ -88,3 +88,9 @@
     cursor: pointer;
     transform: scale(1.5);
 }
+
+@media only screen and (max-width: 1000px) {
+    .task-table .task-actions {
+        max-width: 40px;
+    }
+}

@@ -1,34 +1,34 @@
-import { getUserLoggedInToken } from "../business-layer/authentication";
+import config from '../config.json'
 
-const baseUrl = 'https://localhost:5001/api';
+const { TASK_API } = config.APIS;
 
 export const getTasksRequest = _ => {
-    return fetch(`${baseUrl}/Task`, {
+    return fetch(TASK_API, {
         method: 'GET',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }
 
 export const createTaskRequest = task => {
-    return fetch(baseUrl + '/Task', {
+    return fetch(TASK_API, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getUserLoggedInToken()}`
         },
+        credentials: 'include',
         body: JSON.stringify(task)
     });
 }
 
 export const updateTaskRequest = task => {
-    return fetch(baseUrl + '/Task', {
+    return fetch(TASK_API, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getUserLoggedInToken()}`
         },
+        credentials: 'include',
         body: JSON.stringify(task)
     });
 }
@@ -36,24 +36,24 @@ export const updateTaskRequest = task => {
 export const updateTaskDateRequest = (id, date) => {
     const args = `?id=${id}&date=${date}`;
 
-    return fetch(baseUrl + `/Task/UpdateDate${args}`, {
+    return fetch(TASK_API + `/UpdateDate${args}`, {
         method: 'PUT',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }
 
 export const updateTaskStatusRequest = (id, status) => {
     const args = `?id=${id}&status=${status}`;
 
-    return fetch(baseUrl + `/Task/UpdateStatus${args}`, {
+    return fetch(TASK_API + `/UpdateStatus${args}`, {
         method: 'PUT',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }
 
 export const deleteTaskRequest = (id) => {
-    return fetch(baseUrl + `/Task/${id}`, {
+    return fetch(TASK_API + `/${id}`, {
         method: 'DELETE',
-        headers: {'Authorization': `Bearer ${getUserLoggedInToken()}`}
+        credentials: 'include',
     });
 }

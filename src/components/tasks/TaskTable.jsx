@@ -2,7 +2,8 @@ import React from 'react'
 import '../../styles/components/tasks/task-table.css';
 import { dateTimeToDate } from '../../utils/date-time-converter';
 import { deleteDialog, successMessage, errorMessage } from '../../utils/sweet-alert';
-import { deleteTask, updateTaskStatus } from '../../business-layer/tasks.js';
+import { deleteTask } from '../../business-layer/tasks/delete-task';
+import { updateTaskStatus } from '../../business-layer/tasks/update-task-status';
 
 export default function TaskTable({tasks, onTaskClick, updateTasks}) {
 
@@ -15,20 +16,22 @@ export default function TaskTable({tasks, onTaskClick, updateTasks}) {
     }
     
     const handleDeleteTask = async (id) => {
-        if (await deleteTask(id)) {
-            successMessage("Success", "Task deleted!").then(_ => updateTasks(tasks.filter(t => t.id !== id)));
-            return;
-        }
+        let response = await deleteTask(id);
 
-        errorMessage('Error', 'Error deleting the task please try again!');
+        if (response.userNotLoggedIn) window.location.href = '/Login';
+
+        if (response.success) successMessage("Success", "Task deleted!").then(_ => updateTasks(tasks.filter(t => t.id !== id)));
+        else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
     }
 
     const handleUpdateStatus = async (id, status) => {
         let updatedTask = tasks.find(t => t.id === id);
         updatedTask.status = status;
 
-        updateTaskStatus(id, status).then(success => {
-            if (success) updateTasks(tasks.map(t => t.id !== id ? t : updatedTask));
+        updateTaskStatus(id, status).then(r => {
+            if (r.userNotLoggedIn) window.location.href = '/Login';
+
+            if (r.success) updateTasks(tasks.map(t => t.id !== id ? t : updatedTask));
             else errorMessage('Error', 'Error updating task please try again!');
         })
     }

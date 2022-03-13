@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { secondsToHoursMinutesSecondsFormat } from '../../utils/date-time-converter'
 import { errorMessage } from '../../utils/sweet-alert'
-import { getUser } from '../../business-layer/user'
+import { getUser } from '../../business-layer/users/get-user'
 import '../../styles/components/tasks/timer.css'
 import TimerSettingsModal from '../modals/TimerSettingsModal'
 
@@ -70,8 +70,10 @@ export default function TimerComponent() {
     }
 
     useEffect(() => {
-        getUser().then(user => {
-            if (!user) errorMessage("User not logged in").then(_ => window.location.href = '/Login');
+        getUser().then(response => {
+            const { user, userNotLoggedIn } = response; 
+
+            if (userNotLoggedIn) errorMessage("User not logged in").then(_ => window.location.href = '/Login');
             if (user.defaultBreakTime) setDefaultBreakTime(user.defaultBreakTime);
             if (user.defaultFocusTime) {
                 setTime(user.defaultFocusTime);
