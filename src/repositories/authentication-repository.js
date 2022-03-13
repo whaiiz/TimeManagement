@@ -1,10 +1,12 @@
-const baseUrl = 'https://localhost:5001/api';
+import config from '../config.json'
+
+const { AUTHENTICATION_API } = config.APIS;
 
 export const loginRequest = (username, password) => {
     let user = {
         username, password
     }
-    return fetch(baseUrl + '/Authentication/Login', {
+    return fetch(AUTHENTICATION_API + '/Login', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -16,7 +18,7 @@ export const loginRequest = (username, password) => {
 }
 
 export const registerRequest = (user) => {
-    return fetch(baseUrl + '/Authentication/Register', {
+    return fetch(AUTHENTICATION_API + '/Register', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -27,13 +29,13 @@ export const registerRequest = (user) => {
 }
 
 export const forgotPasswordRequest = email => {
-    return fetch(baseUrl + `/Authentication/ForgotPassword?email=${email}`, {
+    return fetch(AUTHENTICATION_API + `/ForgotPassword?email=${email}`, {
         method: 'POST',
     });
 }
 
 export const resetPasswordRequest = (newPassword, token) => {
-    return fetch(baseUrl + '/Authentication/ResetPassword', {
+    return fetch(AUTHENTICATION_API + '/ResetPassword', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -41,5 +43,15 @@ export const resetPasswordRequest = (newPassword, token) => {
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(newPassword)
+    });
+};
+
+export const refreshTokenRequest = () => {
+    return fetch(AUTHENTICATION_API + '/RefreshToken', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
     });
 };
