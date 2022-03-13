@@ -1,10 +1,10 @@
-import { loginRequest, registerRequest, forgotPasswordRequest, resetPasswordRequest } from '../repositories/authentication-repository';
+import { loginRequest, registerRequest, forgotPasswordRequest, 
+    resetPasswordRequest, refreshTokenRequest } from '../repositories/authentication-repository';
 
 const getLoginResponse = (request, requestResponse) => {
     let result = { isLoggedIn: false, message: requestResponse }
 
     if (request.status === 200) {
-        localStorage.setItem("auth-token", requestResponse);
         result.isLoggedIn = true;
         result.message = "Login success";
     }
@@ -59,6 +59,15 @@ export const resetPassword = async (newPassword, token) => {
         let request = await resetPasswordRequest(newPassword, token);
         return getResetPasswordResponse(request, await request.json());
     } catch (ex) {
+        return { success: false, message: 'Unexpected error! Try again later'}
+    }
+}
+
+export const refreshToken = async () => {
+    try {
+        let request = await refreshTokenRequest();
+        return await request.json();
+    } catch(ex) {
         return { success: false, message: 'Unexpected error! Try again later'}
     }
 }
