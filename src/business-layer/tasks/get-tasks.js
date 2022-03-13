@@ -1,6 +1,11 @@
 import { refreshToken } from '../authentication'
 import { getTasksRequest }  from '../../repositories/task-repository';
 
+const unknownErrorResponse = {
+    success: false, 
+    tasks: []
+}
+
 const handleUnauthorizedResponse = async () => {
     let response = await refreshToken();
     if (response.status !== 200) return { success: false, userNotLoggedIn: true }
@@ -13,11 +18,6 @@ const handleSuccessResponse = async request => {
 }
 
 const handleInternalServerErrorResponse = async _ => unknownErrorResponse;
-
-const unknownErrorResponse = {
-    success: false, 
-    tasks: []
-}
 
 const responseHandlers = {
     401 : handleUnauthorizedResponse,

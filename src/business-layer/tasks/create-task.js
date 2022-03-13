@@ -6,10 +6,10 @@ const unknownErrorResponse = {
     task: {}
 }
 
-const handleUnauthorizedResponse = async () => {
+const handleUnauthorizedResponse = async (request, task) => {
     let refreshTokenResponse = await refreshToken();
     if (refreshTokenResponse.status !== 200) return { success: false, userNotLoggedIn: true }
-    return await createTask();
+    return await createTask(task);
 }
 
 const handleSuccessResponse = async request => {
@@ -33,7 +33,7 @@ export const createTask = async task => {
     try {
         let request = await createTaskRequest(task);
         let handleResponse = responseHandlers[request.status];
-        return handleResponse ? await handleResponse(request) : unknownErrorResponse;
+        return handleResponse ? await handleResponse(request, task) : unknownErrorResponse;
     } catch(ex) {
         return unknownErrorResponse;
     }
