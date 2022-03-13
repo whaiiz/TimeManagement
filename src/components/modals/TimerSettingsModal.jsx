@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Modal from './Modal'
 import '../../styles/components/modals/timer-settings-modal.css'
-import { updateUserDefaultBreakTime, updateUserDefaultFocusTime} from '../../business-layer/user'
+import { updateUserDefaultBreakTime } from '../../business-layer/users/update-user-default-break-time'
+import { updateUserDefaultFocusTime } from '../../business-layer/users/update-user-default-focus-time'
 import { secondsToHoursMinutesFormat, hoursMinuteFormatToSeconds } from '../../utils/date-time-converter'
+import { errorMessage } from '../../utils/sweet-alert'
 
 export default function TimerSettingsModal({isVisible, closeModalCallback, userSettings, onSavedSettings}) {
     const [defaultBreakTime, setDefaultBreakTime] = useState(300);
     const [defaultFocusTime, setDefaultFocusTime] = useState(1500);
 
     const saveSettings = async _ => {
-        let successUpdatingDefaultBreakTime = await updateUserDefaultBreakTime(defaultBreakTime);
-        let successUpdatingDefaultFocusTime = await updateUserDefaultFocusTime(defaultFocusTime);
+        let updateDefaultBreakTimeResponse = await updateUserDefaultBreakTime(defaultBreakTime);
+        let updateDefaultFocusTimeResponse = await updateUserDefaultFocusTime(defaultFocusTime);
 
-        if (successUpdatingDefaultBreakTime && successUpdatingDefaultFocusTime) {
+        if (updateDefaultBreakTimeResponse.userNotLoggedIn || updateDefaultFocusTimeResponse.userNotLoggedIn) {
+            window.location.href = '/Login';
+        } 
+
+        if (updateDefaultBreakTimeResponse.success || updateDefaultFocusTimeResponse.success) {
             onSavedSettings(defaultBreakTime, defaultFocusTime);
             closeModalCallback();
         }
+        else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
     }
 
     useEffect(() => {

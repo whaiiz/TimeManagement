@@ -3,7 +3,9 @@ import Navbar from '../components/common/Navbar';
 import TimerComponent from '../components/tasks/Timer';
 import TodayTasksList from '../components/tasks/TodayTaskList';
 import { getTasks } from '../business-layer/tasks/get-tasks';
-import { createTask, updateTaskStatus, updateTaskDate } from '../business-layer/tasks';
+import { updateTaskStatus } from '../business-layer/tasks/update-task-status';
+import { updateTaskDate } from '../business-layer/tasks/update-task-date';
+import { createTask } from '../business-layer/tasks/create-task';
 import { isDateTimeToday } from '../utils/date-time-converter';
 import '../styles/pages/today.css';
 import AutoCompleteTaskInput from '../components/tasks/AutoCompleteTaskInput';
@@ -14,23 +16,43 @@ export default function Today() {
     const [tasks, setTasks] = useState([]);
 
     const createNewTaskForToday = async name => {
-        const result = await createTask({
+        const response = await createTask({
             name: name,
             dateTime: new Date(),
             status: 'ToDo'
         });
 
-        if (result.success) fetchTasks();
+        if (response.userNotLoggedIn) window.location.href = '/Login';
+
+        if (response.success) fetchTasks();
+        else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
     }
 
-    const addExistingTaskForToday = id => {
+    const addExistingTaskForToday = async id => {
         const task = tasks.find(t => t.id === id);
-        if (task) updateTaskDate(id, new Date().toISOString()).then(_ => fetchTasks());
+
+        if (!task) return;
+
+        updateTaskDate(id, new Date().toISOString()).then(r => {
+            
+            if (r.userNotLoggedIn) window.location.href = '/Login';
+
+            if (r.success) fetchTasks();
+            else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
+        });
     }
 
     const completeTodayTask = async id => {
-        const success = await updateTaskStatus(id, 'Done');
-        if (success) fetchTasks();
+        const task = tasks.find(t => t.id === id);
+
+        if (!task) return;
+
+        const response = await updateTaskStatus(id, 'Done');
+
+        if (response.userNotLoggedIn) window.location.href = '/Login';
+
+        if (response.success) fetchTasks();
+        else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
     }
 
     const fetchTasks = _ => {

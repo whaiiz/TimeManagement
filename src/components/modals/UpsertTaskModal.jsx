@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { updateTask, createTask } from '../../business-layer/tasks';
+import { updateTask } from '../../business-layer/tasks/update-task';
+import { createTask } from '../../business-layer/tasks/create-task';
 import { errorMessage, successMessage } from '../../utils/sweet-alert';
 import Modal from './Modal'; 
 import '../../styles/components/modals/upsert-task-modal.css';
@@ -38,28 +39,28 @@ export default function UpsertTaskModal({isVisible, closeCallback, task}) {
         setValue("description", task.description);
         setValue("status", task.status);
         setValue("dateTime", dateString)
-    }, [task])
+    }, [task, reset, setValue])
 
     let getModalTitle = () => {
         return task.id ?  "Update Task" : "Add Task";
     }
 
     let create = async data => {
-        if (await createTask(data)) {
-            successMessage("Success", "Task created!").then(_ => window.location.reload());
-            return;
-        }
+        let response = await createTask(data);
 
-        errorMessage("Error", "Error creating task! Please try again.");
+        if (response.userNotLoggedIn) window.location.href = '/Login';
+
+        if (response.success) successMessage("Success", "Task created!").then(_ => window.location.reload());
+        else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
     }
 
     let update = async data => {
-        if (await updateTask(data)) {
-            successMessage("Success", "Task updated!").then(_ => window.location.reload());
-            return;
-        }
+        let response = await updateTask(data);
 
-        errorMessage("Error", "Error updating task! Please try again.");
+        if (response.userNotLoggedIn) window.location.href = '/Login';
+
+        if (response.success) successMessage("Success", "Task updated!").then(_ => window.location.reload());
+        else errorMessage("Error", "Something went wrong").then(_ => window.location.href = '/Login');
     }
 
     let onSubmit = async data => {
