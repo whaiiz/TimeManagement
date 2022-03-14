@@ -27,7 +27,7 @@ const responseHandlers = {
 
 export const updateUserDefaultBreakTime = async (breakTime) => {
     try {
-        let request = await updateUserDefaultBreakTimeRequest();
+        let request = await updateUserDefaultBreakTimeRequest(breakTime);
         let handleResponse = responseHandlers[request.status];
         return handleResponse ? await handleResponse(request, breakTime) : unknownErrorResponse;
     } catch(ex) { return unknownErrorResponse; }
