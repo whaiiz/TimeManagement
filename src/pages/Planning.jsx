@@ -46,13 +46,16 @@ export default function Planning() {
         <main className="task-planning">
             <Navbar />
             <section className="task-plan">
-                <article className='name'>
-                    <AutoCompleteInput className="name"
+                <article className='name-container'>
+                    <AutoCompleteInput
                         collection={tasks.filter(t => dateTimeToDate(t.dateTime) !== planningDate)} 
-                        onItemClick={id => handleUpdateTaskDate(id, planningDate)}/>
+                        onItemClick={id => handleUpdateTaskDate(id, planningDate)}
+                        placeholder = "Search Task"
+                        classes="name-input"/>
                 </article>
-                <article className="date">
-                    <input type="date" value={planningDate} onChange={e => setPlanningDate(e.target.value)}/>
+                <article className="date-container">
+                    <input type="date" className='date-input'
+                        value={planningDate} onChange={e => setPlanningDate(e.target.value)}/>
                 </article>
             </section>
             <TaskTableWithPagination 

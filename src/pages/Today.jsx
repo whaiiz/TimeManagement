@@ -73,7 +73,7 @@ export default function Today() {
     }, [])
     
     return(
-        <React.Fragment>
+        <main className='today'>
             <Navbar />
             <section className='today-container'>
                 <TimerComponent />
@@ -85,6 +85,6 @@ export default function Today() {
                     tasks={todaysTasks} 
                     completeTaskCb={completeTodayTask} />
             </section>
-        </React.Fragment>
+        </main>
     );
 }

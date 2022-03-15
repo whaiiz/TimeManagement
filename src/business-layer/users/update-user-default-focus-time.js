@@ -27,7 +27,7 @@ const responseHandlers = {
 
 export const updateUserDefaultFocusTime = async (focusTime) => {
     try {
-        let request = await updateUserDefaultFocusTimeRequest();
+        let request = await updateUserDefaultFocusTimeRequest(focusTime);
         let handleResponse = responseHandlers[request.status];
         return handleResponse ? await handleResponse(request, focusTime) : unknownErrorResponse;
     } catch(ex) { return unknownErrorResponse; }

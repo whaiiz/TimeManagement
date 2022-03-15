@@ -5,8 +5,7 @@ import { logout } from '../../business-layer/authentication.js'
 export default function Navbar() {
 
     let handleLogout = () => {
-        logout();
-        window.location.href = '/Login';
+        logout().then(_ => window.location.href = '/Login');
     }
 
     return(

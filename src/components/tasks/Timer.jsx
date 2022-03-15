@@ -23,7 +23,7 @@ export default function TimerComponent() {
 
             if (newTime === 0) {
                 setTime(defaultFocusTime);
-                stopTimer();
+                onTimeEnding();
                 return 0;
             };
 
@@ -41,6 +41,16 @@ export default function TimerComponent() {
     const pauseTimer = _ => {
         clearInterval(intervalIdRef.current);
         setIsTimerRunning(false);
+    }
+
+    const onTimeEnding = _ => {
+        let audio = new Audio("/alarm.mp3");
+        audio.play();
+
+        if (!isFocusTime) setTime(defaultFocusTime);
+        else setTime(defaultBreakTime);
+
+        setIsFocusTime(!isFocusTime);
     }
 
     const stopTimer = _ => {
@@ -82,7 +92,11 @@ export default function TimerComponent() {
         })
 
         return () => clearInterval(intervalIdRef.current);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+
+    }, [isFocusTime]);
 
     return(
         <React.Fragment>
