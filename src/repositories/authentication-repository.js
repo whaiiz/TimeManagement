@@ -40,8 +40,8 @@ export const resetPasswordRequest = (newPassword, token) => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
         },
+        credentials: 'include',
         body: JSON.stringify(newPassword)
     });
 };
@@ -53,5 +53,16 @@ export const refreshTokenRequest = () => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
+    });
+};
+
+export const logoutRequest = () => {
+    return fetch(AUTHENTICATION_API + '/logout', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
     });
 };

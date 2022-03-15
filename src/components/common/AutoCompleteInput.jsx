@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/common/auto-complete.css';
 
-export default function AutoCompleteInput({collection, onItemClick}) {
+export default function AutoCompleteInput({collection, onItemClick, placeholder, classes}) {
 
     const [suggestions, setSuggestions] = useState(collection);
     const [areSuggestionsVisible, setAreSuggestionsVisible] = useState(false);
@@ -17,7 +17,8 @@ export default function AutoCompleteInput({collection, onItemClick}) {
     return(
         <form autoComplete="off">
             <section className="auto-complete">
-                <input type="text" onInput={e => setSuggestions(getSuggestions(e))}
+                <input type="text" placeholder={placeholder} className={classes}
+                                   onInput={e => setSuggestions(getSuggestions(e))}
                                    onClick={_ => setAreSuggestionsVisible(true)}
                                    onBlur={_ => setTimeout(_ => setAreSuggestionsVisible(false), 100)} />
                 { areSuggestionsVisible && <article className="auto-complete-items">

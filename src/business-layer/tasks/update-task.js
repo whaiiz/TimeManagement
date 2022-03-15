@@ -27,7 +27,7 @@ const responseHandlers = {
 
 export const updateTask = async (task) => {
     try {
-        let request = await updateTaskRequest();
+        let request = await updateTaskRequest(task);
         let handleResponse = responseHandlers[request.status];
         return handleResponse ? await handleResponse(request, task) : unknownErrorResponse;
     } catch(ex) { return unknownErrorResponse; }

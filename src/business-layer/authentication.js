@@ -1,5 +1,5 @@
 import { loginRequest, registerRequest, forgotPasswordRequest, 
-    resetPasswordRequest, refreshTokenRequest } from '../repositories/authentication-repository';
+    resetPasswordRequest, refreshTokenRequest, logoutRequest } from '../repositories/authentication-repository';
 
 const getLoginResponse = (request, requestResponse) => {
     let result = { isLoggedIn: false, message: requestResponse }
@@ -72,4 +72,9 @@ export const refreshToken = async () => {
     }
 }
 
-export const logout = _ => localStorage.removeItem("auth-token");
+export const logout = async _ => {
+    try {
+        let response = await logoutRequest();
+        return response.status === 200 ? true : false;
+    } catch(ex) { return false; }
+} 
