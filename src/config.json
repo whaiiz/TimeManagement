@@ -1,7 +1,7 @@
 {
     "APIS": {
-      "TASK_API": "https://localhost:5001/api/Task",
-      "USER_API": "https://localhost:5001/api/User",
-      "AUTHENTICATION_API": "https://localhost:5001/api/Authentication"
+      "TASK_API": "https://gandafocusapi.azurewebsites.net//api/Task",
+      "USER_API": "https://gandafocusapi.azurewebsites.net//api/User",
+      "AUTHENTICATION_API": "https://gandafocusapi.azurewebsites.net//api/Authentication"
     }
 }
